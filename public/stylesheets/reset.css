@@ -25,3 +25,11 @@ body, header, nav {
 h1 {
   font-size: 2rem;
 }
+
+input {
+  border: none
+}
+
+button {
+  border: none
+}
