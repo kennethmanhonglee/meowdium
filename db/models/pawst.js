@@ -18,11 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {});
-  Pawst.associate = function(models) {
+  Pawst.associate = function (models) {
     // associations can be defined here
     Pawst.belongsTo(models.User, { foreignKey: 'userId' });
     Pawst.hasMany(models.Pawment, { foreignKey: 'pawstId' });
-    Pawst.hasMany(models.Catnips, { foreignKey: 'pawstId' });
+    Pawst.hasMany(models.Catnip, { foreignKey: 'pawstId' });
   };
   return Pawst;
 };
