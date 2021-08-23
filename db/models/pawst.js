@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   Pawst.associate = function(models) {
     // associations can be defined here
     Pawst.belongsTo(models.User, { foreignKey: 'userId' });
+    Pawst.hasMany(model.Pawment, { foreignKey: 'pawstId' })
   };
   return Pawst;
 };
