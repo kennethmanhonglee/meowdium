@@ -11,7 +11,7 @@ const { User } = require('../db/models');
 //   res.send('respond with a resource');
 // });
 
-const validators = [
+const signupValidators = [
   check('username')
     .exists({ checkFalsy: true })
     .withMessage('Please input a valid Username.')
@@ -28,10 +28,10 @@ const validators = [
     .withMessage('Please input a valid email address.')
     // add custom validator for email
     .custom((value) => {
-        return User.findOne({ where: { emailAddress: value } })
-            .then((user) => {
-                if (user) return Promise.reject('The provided Email Address is already in use.')
-            })
+      return User.findOne({ where: { emailAddress: value } })
+        .then((user) => {
+          if (user) return Promise.reject('The provided Email Address is already in use.')
+        })
     }),
   check('password')
     .exists({ checkFalsy: true })
@@ -46,12 +46,12 @@ const validators = [
     .isLength({ min: 8, max: 50 })
     .withMessage('Password must not be longer than 50 characters.')
     .custom((value, { req }) => {
-        if (value !== req.body.password) throw new Error('Confirm password does not match Password.')
-        return true;
+      if (value !== req.body.password) throw new Error('Confirm password does not match Password.')
+      return true;
     })
 ]
 
-router.get("/signup", csrfProtection, asyncHandler (async (req, res, next) => {
+router.get("/signup", csrfProtection, asyncHandler(async (req, res, next) => {
   const user = await User.build();
 
   res.render('user-signup', {
@@ -61,29 +61,35 @@ router.get("/signup", csrfProtection, asyncHandler (async (req, res, next) => {
   });
 }));
 
-router.post("/signup", csrfProtection, validators, asyncHandler (async (req, res, next) => {
+router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req, res, next) => {
   const { username, email, password } = req.body;
-  const user = await User.build( { username, email });
+  const user = await User.build({ username, email });
 
   const validationErrors = validationResult(req);
 
-    if (validationErrors.isEmpty()) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      user.hashedPassword = hashedPassword;
-      await user.save();
-      // TODO: log user in
-      return res.redirect('/') // subject to change
-    } else {
-      const errors = validationErrors.array().map((error) => error.msg);
-      return res.render('user-signup', {
-        title: 'Register',
-        user,
-        errors,
-        csrfToken: req.csrfToken()
-      })
-    }
+  if (validationErrors.isEmpty()) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.hashedPassword = hashedPassword;
+    await user.save();
+    // TODO: log user in
+    return res.redirect('/') // subject to change
+  } else {
+    const errors = validationErrors.array().map((error) => error.msg);
+    return res.render('user-signup', {
+      title: 'Register',
+      user,
+      errors,
+      csrfToken: req.csrfToken()
+    })
+  }
 
 
 }));
+
+router.get('/login', csrfProtection, asyncHandler(async (req, res) => {
+  res.render('user-login', { title: 'Login', csrfToken: req.csrfToken() });
+}));
+
+router.post('/login', csrfProtection, asyncHandler(async (req, res) => { }));
 
 module.exports = router;
