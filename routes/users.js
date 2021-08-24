@@ -48,7 +48,7 @@ const signupValidators = [
     .isLength({ min: 8, max: 50 })
     .withMessage('Password must not be longer than 50 characters.')
     .custom((value, { req }) => {
-      if (value !== req.body.password) throw 'Confirm password does not match Password.)
+      if (value !== req.body.password) throw 'Confirm password does not match Password.';
       return true;
     })
 ];
