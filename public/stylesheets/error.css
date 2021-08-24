@@ -1,0 +1,10 @@
+/* Error Styling
+
+(Hopefully you never need to see this since this is server stuff!) */
+
+.error-box pre {
+  font-size: 0.8rem;
+}
+.error-box h1 {
+  font-size: 1rem;
+}
