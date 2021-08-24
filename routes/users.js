@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
+
 const { csrfProtection, asyncHandler } = require('./utils');
+const { loginUser } = require('../auth');
 
 const { User } = require('../db/models');
 
@@ -46,7 +48,7 @@ const signupValidators = [
     .isLength({ min: 8, max: 50 })
     .withMessage('Password must not be longer than 50 characters.')
     .custom((value, { req }) => {
-      if (value !== req.body.password) throw new Error('Confirm password does not match Password.')
+      if (value !== req.body.password) throw 'Confirm password does not match Password.)
       return true;
     })
 ];
@@ -106,15 +108,50 @@ router.get('/login', csrfProtection, asyncHandler(async (req, res) => {
 
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  const user = await User.build({
-    username
-  })
+
+  let errors = [];
+
   // validate username and password
   const validationErrors = validationResult(req);
   if (validationErrors.isEmpty()) {
-    // login user
+    //try to find user
+    let user = await User.findOne({
+      where: username
+    });
+
+    if (user) {
+      // check pw
+      const matchingPW = await bcrypt.compare(password, user.hashedPassword);
+      if (matchingPW) {
+        // happy path
+        loginUser(req, res, user);
+        res.redirect('/');
+      } else {
+        // username right, pw wrong
+        const errMsg = 'Invalid Username/Password';
+        errors.push(errMsg);
+        res.render('user-login', {
+          title: 'Login',
+          errors,
+          csrfToken: req.csrfToken(),
+          user
+        })
+      }
+    } else {
+      // cannot find user with username
+      user = await User.build();
+      const errMsg = 'Invalid Username/Password';
+      errors.push(errMsg);
+      res.render('user-login', {
+        title: 'Login',
+        errors,
+        csrfToken: req.csrfToken(),
+        user
+      })
+    }
   } else {
-    const errors = validationErrors.array().map((error) => error.msg);
+    // something wrong with username/password
+    errors = validationErrors.array().map((error) => error.msg);
     res.render('user-login', {
       title: 'Login',
       errors,
