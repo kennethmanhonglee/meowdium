@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator')
 const { csrfProtection, asyncHandler } = require('./utils');
 const { loginUser, logoutUser, restoreUser } = require('../auth');
 
-const { User } = require('../db/models');
+const { User, Pawst } = require('../db/models');
 
 // /* GET users listing. */
 // router.get('/', function(req, res, next) {
@@ -65,6 +65,21 @@ const loginValidators = [
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
     .withMessage('Hint: Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*()")')
 ];
+
+router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
+  if (!res.locals.authenticated) res.redirect('/users/login');
+  const userId = parseInt(req.params.id, 10);
+  const user = await User.findByPk(userId);
+  const { userName, email } = user;
+  const posts = await Pawst.findAll({ where: { userId } })
+  return res.render('user-page', {
+    title: userName,
+    posts,
+    userName,
+    email
+  })
+}));
+
 
 router.get("/signup", csrfProtection, asyncHandler(async (req, res, next) => {
   if (res.locals.authenticated) {

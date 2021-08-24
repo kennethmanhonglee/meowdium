@@ -17,7 +17,7 @@ const pawstValidators = [
 
 router.get('/new', csrfProtection, asyncHandler(async( req, res, next) => {
     if (!res.locals.authenticated) {
-        return res.redirect('/users/logi');
+        return res.redirect('/users/login');
       }
 
     const post = await Pawst.build();
