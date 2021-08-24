@@ -13,7 +13,7 @@ block content
             div(class='date')= post.updatedAt
             if (locals.user.id === post.userId)
                 div(class='function-btns')
-                    form(action="/pawsts/edit" method="get")
+                    form(action=`/pawsts/${post.id}/edit` method="get")
                         button(type="submit") Edit 
                     form(action="/pawsts/delete" method="delete")
                         button(type="submit") Delete

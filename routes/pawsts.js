@@ -66,7 +66,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   })
 }));
 
-router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
+router.get(/\/(:id)\\d+/, csrfProtection, asyncHandler(async (req, res) => {
   if( !res.locals.authenticated ) {
     return res.redirect('/users/login');
   }
