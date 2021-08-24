@@ -1,13 +1,21 @@
 extends layout.pug
 
+block head
+  link(rel='stylesheet' href='/stylesheets/user-page.css')
+
 block content
+  div.content
+    div.index-top
+      h2 Meowdium
     div(class='feed')
         each post in posts
             div(class='post')
-                div(class='post-title')= post.title
-                if (post.subtitle)
-                    div(class='post-subtitle')= post.subtitle
-                div(class='post-info')
-                    div(class='post-user')= post.User.userName
-                    div(class='post-time')= post.updatedAt
-
+                a(class='post-link' href=`/pawsts/${post.id}`)
+                  div(class='post-title')= post.title
+                  if (post.subtitle)
+                      div(class='post-subtitle')= post.subtitle
+                  div(class='post-info')
+                      a(class="author-link" href=`/users/${post.userId}`)
+                        span(class='post-user')= post.User.userName
+                      span(class='post-time')= post.updatedAt.toDateString()
+            hr
