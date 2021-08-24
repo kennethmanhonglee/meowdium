@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const { check, validationResult } = require('express-validator')
 
 const { csrfProtection, asyncHandler } = require('./utils');
-const { loginUser } = require('../auth');
+const { loginUser, logoutUser, restoreUser } = require('../auth');
 
 const { User } = require('../db/models');
 
@@ -112,6 +112,7 @@ router.get('/login', csrfProtection, asyncHandler(async (req, res) => {
   }
 
   const user = await User.build();
+
   return res.render('user-login', { title: 'Login', csrfToken: req.csrfToken(), user });
 }));
 
@@ -136,7 +137,7 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
       if (matchingPW) {
         // happy path
         loginUser(req, res, user);
-        return res.redirect('/');
+        return req.session.save(() => res.redirect('/'));
       } else {
         // userName right, pw wrong
         const errMsg = 'Invalid Username/Password';
@@ -172,5 +173,10 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
     })
   }
 }));
+
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  return req.session.save(() => res.redirect("/"));
+})
 
 module.exports = router;
