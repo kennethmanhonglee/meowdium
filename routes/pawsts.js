@@ -111,4 +111,21 @@ router.post('/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(asy
   }
 }));
 
+router.post('/:id(\\d+)/delete', asyncHandler(async (req, res) => {
+  if (!res.locals.authenticated) {
+    return res.redirect('/users/login');
+  }
+  const postId = parseInt(req.params.id, 10);
+  const post = await Pawst.findByPk(postId);
+  const { userId } = post;
+
+  if (res.locals.user.id !== post.userId) {
+    return res.status(404).redirect('/');
+  }
+
+  await post.destroy();
+  return res.redirect(`/users/${userId}`)
+
+}));
+
 module.exports = router;
