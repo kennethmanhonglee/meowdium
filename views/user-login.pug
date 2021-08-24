@@ -1,6 +1,11 @@
 extends layout 
 include utils 
 
+block nav-bar
+    div(class='nav-bar')
+        div(class='logo')
+            a(href='/' class='logo-link')
+
 block content 
     +validationErrorSummary(errors)
     form(action='/users/login' method='post')
