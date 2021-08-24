@@ -1,0 +1,13 @@
+extends layout.pug
+
+block content
+    div(class='user-bio')
+    div(class='feed')
+        each post in posts
+            div(class='post')
+                div(class='post-title')= post.title
+                if (post.subtitle)
+                    div(class='post-subtitle')= post.subtitle
+                div(class='post-info')
+                    div(class='post-user')= userName
+                    div(class='post-time')= post.updatedAt

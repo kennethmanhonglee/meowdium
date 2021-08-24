@@ -1,0 +1,22 @@
+extends layout
+include utils
+
+block nav-bar
+    div(class='nav-bar')
+        div(class='logo')
+            a(href='/' class='logo-link')
+        div(class='logged-in-user')
+              a(href="/pawsts/new" class='btn btn-pawst') Pawst
+              form(action='/users/logout' method='post')
+                button(class='btn btn-logout' type='submit') Logout
+
+block content
+    +validationErrorSummary(errors)
+    form(action='/pawsts' method='post')
+        input(type='hidden' name='_csrf' value=csrfToken)
+        +field('title', post.title, 'text', 'Title')
+        div(class='form-group')
+            input(type='text' id='subtitle' name='subtitle' value=post.subtitle placeholder='Subtitle' class='form-control')
+        +field('content', post.content, 'textarea', 'Meow your heart out...')
+        div(class='')
+            button(type='submit' class='btn btn-primary') Submit

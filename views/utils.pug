@@ -1,7 +1,7 @@
 mixin field(fieldName, fieldValue, fieldType, placeholder)
   div(class='form-group')
     if fieldType === 'textarea'
-      textarea(id=fieldName name=fieldName class='form-control' rows='5' required)= fieldValue
+      textarea(id=fieldName name=fieldName class='form-control' placeholder=placeholder rows='5' required)= fieldValue
     else
       input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder class='form-control' required)
 
