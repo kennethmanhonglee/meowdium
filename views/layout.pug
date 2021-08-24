@@ -15,14 +15,14 @@ html
           a(href='/' class='logo-link')
 
         div(class='user-utils')
-          if locals.authenticated 
+          if locals.authenticated
             div(class='logged-in-user')
-              a(href="/pawst/new" class='btn btn-pawst') Pawst
+              a(href="/pawsts/new" class='btn btn-pawst') Pawst
               form(action='/users/logout' method='post')
                 button(class='btn btn-logout' type='submit') Logout
           else
             div(class='logged-out-user')
               a(href="/users/signup" class='btn btn-signup') Signup
               a(href="/users/login" class='btn btn-login') Login
-      
+
     block content
