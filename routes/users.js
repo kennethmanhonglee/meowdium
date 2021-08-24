@@ -14,14 +14,14 @@ const { User } = require('../db/models');
 // });
 
 const signupValidators = [
-  check('username')
+  check('userName')
     .exists({ checkFalsy: true })
     .withMessage('Please input a valid Username.')
     .isLength({ min: 2, max: 50 })
     .withMessage('Username must be greater than 1 characters and less than 50 characters.')
     .matches(/\w+/)
     .withMessage('Username must be alphanumeric. Example: ( a-z, A-Z, _ )'),
-  check('emailAddress')
+  check('email')
     .exists({ checkFalsy: true })
     .withMessage('Please input a valid email address.')
     .isLength({ max: 255 })
@@ -30,7 +30,7 @@ const signupValidators = [
     .withMessage('Please input a valid email address.')
     // add custom validator for email
     .custom((value) => {
-      return User.findOne({ where: { emailAddress: value } })
+      return User.findOne({ where: { email: value } })
         .then((user) => {
           if (user) return Promise.reject('The provided Email Address is already in use.')
         })
@@ -54,7 +54,7 @@ const signupValidators = [
 ];
 
 const loginValidators = [
-  check('username')
+  check('userName')
     .exists({ checkFalsy: true })
     .withMessage('Please input a valid Username.'),
   check('password')
@@ -67,6 +67,10 @@ const loginValidators = [
 ];
 
 router.get("/signup", csrfProtection, asyncHandler(async (req, res, next) => {
+  if (res.locals.authenticated) {
+    return res.redirect('/');
+  }
+
   const user = await User.build();
 
   res.render('user-signup', {
@@ -77,8 +81,8 @@ router.get("/signup", csrfProtection, asyncHandler(async (req, res, next) => {
 }));
 
 router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req, res, next) => {
-  const { username, email, password } = req.body;
-  const user = await User.build({ username, email });
+  const { userName, email, password } = req.body;
+  const user = await User.build({ userName, email });
 
   const validationErrors = validationResult(req);
 
@@ -102,35 +106,41 @@ router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req
 }));
 
 router.get('/login', csrfProtection, asyncHandler(async (req, res) => {
+  if (res.locals.authenticated) {
+    return res.redirect('/');
+  }
+
   const user = await User.build();
-  res.render('user-login', { title: 'Login', csrfToken: req.csrfToken(), user });
+  return res.render('user-login', { title: 'Login', csrfToken: req.csrfToken(), user });
 }));
 
 router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
-  const { username, password } = req.body;
+  const { userName, password } = req.body;
 
   let errors = [];
 
-  // validate username and password
+  // validate userName and password
   const validationErrors = validationResult(req);
   if (validationErrors.isEmpty()) {
     //try to find user
     let user = await User.findOne({
-      where: username
+      where: {
+        userName: userName
+      }
     });
 
     if (user) {
       // check pw
-      const matchingPW = await bcrypt.compare(password, user.hashedPassword);
+      const matchingPW = await bcrypt.compare(password, user.hashedPassword.toString());
       if (matchingPW) {
         // happy path
         loginUser(req, res, user);
-        res.redirect('/');
+        return res.redirect('/');
       } else {
-        // username right, pw wrong
+        // userName right, pw wrong
         const errMsg = 'Invalid Username/Password';
         errors.push(errMsg);
-        res.render('user-login', {
+        return res.render('user-login', {
           title: 'Login',
           errors,
           csrfToken: req.csrfToken(),
@@ -138,11 +148,11 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
         })
       }
     } else {
-      // cannot find user with username
+      // cannot find user with userName
       user = await User.build();
       const errMsg = 'Invalid Username/Password';
       errors.push(errMsg);
-      res.render('user-login', {
+      return res.render('user-login', {
         title: 'Login',
         errors,
         csrfToken: req.csrfToken(),
@@ -150,9 +160,10 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
       })
     }
   } else {
-    // something wrong with username/password
+    // something wrong with userName/password
+    user = await User.build();
     errors = validationErrors.array().map((error) => error.msg);
-    res.render('user-login', {
+    return res.render('user-login', {
       title: 'Login',
       errors,
       csrfToken: req.csrfToken(),

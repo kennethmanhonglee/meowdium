@@ -5,7 +5,7 @@ block content
     +validationErrorSummary(errors)
     form(action='/users/signup' method='post')
         input(type='hidden' name='_csrf' value=csrfToken)
-        +field('username', user.username, 'text', 'Username')
+        +field('userName', user.username, 'text', 'Username')
         +field('email', user.email, 'email', 'Email')
         +field('password', null, 'password', 'Password')
         +field('confirmPassword', null , 'password', 'Confirm Password')

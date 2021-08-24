@@ -3,9 +3,9 @@ include utils
 
 block content 
     +validationErrorSummary(errors)
-    form(action='/users/signup' method='post')
+    form(action='/users/login' method='post')
         input(type='hidden' name='_csrf' value=csrfToken)
-        +field('username', user.username, 'text', 'Username')
+        +field('userName', user.username, 'text', 'Username')
         +field('password', null, 'password', 'Password')
         div(class='')
             button(type='submit' class='btn') Login
