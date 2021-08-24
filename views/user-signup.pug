@@ -1,9 +1,16 @@
 extends layout.pug
 include utils.pug
 
+block head
+  link(rel='stylesheet' href='/stylesheets/signup.css')
+
 block content
-    +validationErrorSummary(errors)
-    form(action='/users/signup' method='post')
+  div.content
+    div.signup-top
+      h2 Join Meowdium
+    div.form-container
+      +validationErrorSummary(errors)
+      form(action='/users/signup' method='post' class='form')
         input(type='hidden' name='_csrf' value=csrfToken)
         +field('userName', user.username, 'text', 'Username')
         +field('email', user.email, 'email', 'Email')

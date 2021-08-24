@@ -1,0 +1,43 @@
+/* Main Styling */ /* Put styling that goes everywhere here */
+
+body {
+  font-family: 'PT Serif', Georgia, Cambria, "Times New Roman", Times, serif;
+  font-size: 21px;
+}
+
+h1 {
+  font-size: 4.5rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+.btn {
+  border-radius: 99em;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-container .errors {
+  margin-bottom: 20px;
+}
+
+input.form-control {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  margin: 0 0 10px;
+}
+
+input.form-control:focus-visible {
+  outline-width: 0;
+  border-color: #000000;
+}
