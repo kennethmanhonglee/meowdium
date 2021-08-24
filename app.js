@@ -8,6 +8,7 @@ const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const { restoreUser } = require('./auth');
 
 const app = express();
 
@@ -25,12 +26,16 @@ const store = new SequelizeStore({ db: sequelize });
 
 app.use(
   session({
+    name: 'meowdium.sid',
     secret: 'superSecret',
     store,
     saveUninitialized: false,
     resave: false,
   })
 );
+app.use(restoreUser);
+
+
 
 // create Session table if it doesn't already exist
 store.sync();
