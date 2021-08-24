@@ -1,9 +1,9 @@
 mixin field(fieldName, fieldValue, fieldType, placeholder)
   div(class='form-group')
     if fieldType === 'textarea'
-      textarea(id=fieldName name=fieldName class='form-control' rows='5')= fieldValue
+      textarea(id=fieldName name=fieldName class='form-control' rows='5' required)= fieldValue
     else
-      input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder class='form-control')
+      input(type=fieldType id=fieldName name=fieldName value=fieldValue placeholder=placeholder class='form-control' required)
 
 mixin validationErrorSummary(errors)
   if errors

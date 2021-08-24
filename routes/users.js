@@ -21,19 +21,21 @@ const signupValidators = [
     .withMessage('Your Username must between 1 and 50 characters long.')
     .matches(/\w+/)
     .withMessage('Your Username must be alphanumeric. Example: ( a-z, A-Z, _ )'),
-  check('emailAddress')
-    .exists({ checkFalsy: true })
-    .withMessage('Please enter an email address.')
+  check('email')
     .isLength({ max: 255 })
     .withMessage('Email address must not be longer than 255 characters.')
+    .exists({ checkFalsy: true })
     .isEmail()
     .withMessage('Please input a valid email address.')
     // add custom validator for email
     .custom((value) => {
-      return User.findOne({ where: { email: value } })
-        .then((user) => {
-          if (user) return Promise.reject('The provided Email Address is already in use.')
-        })
+      if (value) {
+        return User.findOne({ where: { email: value } })
+          .then((user) => {
+            if (user) return Promise.reject('The provided Email Address is already in use.')
+          })
+      }
+      return Promise.resolve();
     }),
   check('password')
     .exists({ checkFalsy: true })
@@ -89,6 +91,7 @@ router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req
     user.hashedPassword = hashedPassword;
     await user.save();
     // TODO: log user in
+    loginUser(req, res, user);
     return res.redirect('/') // subject to change
   } else {
     const errors = validationErrors.array().map((error) => error.msg);
