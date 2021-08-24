@@ -64,6 +64,23 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     userName,
     email
   })
-}))
+}));
+
+router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
+  if( !res.locals.authenticated ) {
+    return res.redirect('/users/login');
+  }
+  const postId = parseInt(req.params.id, 10);
+  const post = await Pawst.findByPk(postId);
+  if( res.locals.user.id !== post.userId ){
+    return res.status(404).redirect('/');
+  }
+  return res.render('edit-pawst', {
+    title: 'Edit Pawst',
+    post,
+    csrfToken: req.csrfToken()
+  })
+
+}));
 
 module.exports = router;
