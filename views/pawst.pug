@@ -15,7 +15,7 @@ block content
                 div(class='function-btns')
                     form(action=`/pawsts/${post.id}/edit` method="get")
                         button(type="submit") Edit 
-                    form(action="/pawsts/delete" method="delete")
+                    form(action=`/pawsts/${post.id}/delete` method="post")
                         button(type="submit") Delete
         div(class="content")= post.content
         div(class="pawst-content-footer")
