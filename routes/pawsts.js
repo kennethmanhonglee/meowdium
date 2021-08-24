@@ -66,7 +66,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   })
 }));
 
-router.get(/\/(:id)\\d+/, csrfProtection, asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
   if( !res.locals.authenticated ) {
     return res.redirect('/users/login');
   }
@@ -80,7 +80,35 @@ router.get(/\/(:id)\\d+/, csrfProtection, asyncHandler(async (req, res) => {
     post,
     csrfToken: req.csrfToken()
   })
+}));
 
+router.post('/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(async (req, res) => {
+  if( !res.locals.authenticated ) {
+    return res.redirect('/users/login');
+  }
+  const { title, subtitle, content } = req.body
+  const postId = parseInt(req.params.id, 10);
+  const post = await Pawst.findByPk(postId);
+  if( res.locals.user.id !== post.userId ){
+    return res.status(404).redirect('/');
+  }
+  const validationErrors = validationResult( req );
+  if( validationErrors.isEmpty() ){
+    await post.update({
+      title,
+      subtitle,
+      content
+    })
+    return res.redirect(`/pawsts/${postId}`);
+  } else {
+    const errors = validationErrors.array().map((error) => error.msg);
+    return res.render('edit-pawst', {
+      title: 'Edit Pawst',
+      post,
+      errors,
+      csrfToken: req.csrfToken()
+    })
+  }
 }));
 
 module.exports = router;

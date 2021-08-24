@@ -12,11 +12,11 @@ block nav-bar
 
 block content
   +validationErrorSummary(errors)
-    form(action='/pawsts' method='post')
-      input(type='hidden' name='_csrf' value=csrfToken)
-      +field('title', post.title, 'text', 'Title')
-      div(class='form-group')
-        input(type='text' id='subtitle' name='subtitle' value=post.subtitle placeholder='Subtitle' class='form-control')
-      +field('content', post.content, 'textarea', 'Meow your heart out...')
-      div(class='')
-        button(type='submit' class='btn btn-primary') Submit
+  form(action=`/pawsts/${post.id}/edit` method='post')
+    input(type='hidden' name='_csrf' value=csrfToken)
+    +field('title', post.title, 'text', 'Title')
+    div(class='form-group')
+      input(type='text' id='subtitle' name='subtitle' value=post.subtitle placeholder='Subtitle' class='form-control')
+    +field('content', post.content, 'textarea', 'Meow your heart out...')
+    div(class='')
+      button(type='submit' class='btn btn-primary') Submit
