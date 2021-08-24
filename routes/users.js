@@ -14,14 +14,14 @@ const { User } = require('../db/models');
 const validators = [
   check('username')
     .exists({ checkFalsy: true })
-    .withMessage('Please input a valid Username.')
+    .withMessage('Please input a Username.')
     .isLength({ min: 2, max: 50 })
-    .withMessage('Username must be greater than 1 characters and less than 50 characters.')
+    .withMessage('Your Username must between 1 and 50 characters long.')
     .matches(/\w+/)
-    .withMessage('Username must be alphanumeric. Example: ( a-z, A-Z, _ )'),
+    .withMessage('Your Username must be alphanumeric. Example: ( a-z, A-Z, _ )'),
   check('emailAddress')
     .exists({ checkFalsy: true })
-    .withMessage('Please input a valid email address.')
+    .withMessage('Please enter an email address.')
     .isLength({ max: 255 })
     .withMessage('Email address must not be longer than 255 characters.')
     .isEmail()
@@ -37,14 +37,12 @@ const validators = [
     .exists({ checkFalsy: true })
     .withMessage('Please enter a valid password.')
     .isLength({ min: 8, max: 50 })
-    .withMessage('Password must not be longer than 50 characters.')
+    .withMessage('Password must be between 8 and 50 characters long.')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
     .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*()"'),
   check('confirmPassword')
     .exists({ checkFalsy: true })
-    .withMessage('Please enter a valid password.')
-    .isLength({ min: 8, max: 50 })
-    .withMessage('Password must not be longer than 50 characters.')
+    .withMessage('Please re-type your password to confirm it.')
     .custom((value, { req }) => {
         if (value !== req.body.password) throw new Error('Confirm password does not match Password.')
         return true;
