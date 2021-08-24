@@ -1,13 +1,20 @@
 extends layout.pug
 
+block head
+  link(rel='stylesheet' href='/stylesheets/index.css')
+
 block content
+  div.content
+    div.index-top
+      h2= title
     div(class='user-bio')
     div(class='feed')
         each post in posts
             div(class='post')
-                div(class='post-title')= post.title
-                if (post.subtitle)
-                    div(class='post-subtitle')= post.subtitle
-                div(class='post-info')
-                    div(class='post-user')= userName
-                    div(class='post-time')= post.updatedAt
+                a(class='post-link' href=`/pawsts/${post.id}`)
+                  div(class='post-title')= post.title
+                  if (post.subtitle)
+                      div(class='post-subtitle')= post.subtitle
+                  div(class='post-info')
+                      span(class='post-time')= post.updatedAt.toDateString()
+            hr
