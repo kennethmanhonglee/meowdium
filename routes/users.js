@@ -49,7 +49,20 @@ const signupValidators = [
       if (value !== req.body.password) throw new Error('Confirm password does not match Password.')
       return true;
     })
-]
+];
+
+const loginValidators = [
+  check('username')
+    .exists({ checkFalsy: true })
+    .withMessage('Please input a valid Username.'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Please input a valid Password.')
+    .isLength({ min: 8, max: 50 })
+    .withMessage('Hint: Password must not be longer than 50 characters.')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+    .withMessage('Hint: Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*()")')
+];
 
 router.get("/signup", csrfProtection, asyncHandler(async (req, res, next) => {
   const user = await User.build();
@@ -90,6 +103,10 @@ router.get('/login', csrfProtection, asyncHandler(async (req, res) => {
   res.render('user-login', { title: 'Login', csrfToken: req.csrfToken() });
 }));
 
-router.post('/login', csrfProtection, asyncHandler(async (req, res) => { }));
+router.post('/login', csrfProtection, asyncHandler(async (req, res) => {
+  const { username, password } = req.body;
+
+  // validate username and password
+}));
 
 module.exports = router;
