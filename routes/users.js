@@ -100,13 +100,28 @@ router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req
 }));
 
 router.get('/login', csrfProtection, asyncHandler(async (req, res) => {
-  res.render('user-login', { title: 'Login', csrfToken: req.csrfToken() });
+  const user = await User.build();
+  res.render('user-login', { title: 'Login', csrfToken: req.csrfToken(), user });
 }));
 
-router.post('/login', csrfProtection, asyncHandler(async (req, res) => {
+router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-
+  const user = await User.build({
+    username
+  })
   // validate username and password
+  const validationErrors = validationResult(req);
+  if (validationErrors.isEmpty()) {
+    // login user
+  } else {
+    const errors = validationErrors.array().map((error) => error.msg);
+    res.render('user-login', {
+      title: 'Login',
+      errors,
+      csrfToken: req.csrfToken(),
+      user
+    })
+  }
 }));
 
 module.exports = router;
