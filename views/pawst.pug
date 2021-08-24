@@ -1,0 +1,35 @@
+extends layout 
+
+block content 
+    div(class='user-bio')
+        div(class='user-name')= userName
+        div(class='user-email')= email
+    div(class='pawst-body')
+        div(class='title')= post.title
+        if (post.subtitle)
+            div(class='subtitle')= post.subtitle
+        div(class='post-info')
+            div(class='author')= userName
+            div(class='date')= post.updatedAt
+            if (locals.user.id === post.userId)
+                div(class='function-btns')
+                    form(action="/pawsts/edit" method="get")
+                        button(type="submit") Edit 
+                    form(action="/pawsts/delete" method="delete")
+                        button(type="submit") Delete
+        div(class="content")= post.content
+        div(class="pawst-content-footer")
+            div(class="author")
+            div(class="likes-stats")
+                div(class="like-icon")
+                div(class="like-count")
+            div(class="comments-stats")
+                div(class="comment-icon")
+                div(class="comment-count")
+        div(class="comments-container")
+            //- each comment in comments
+            //- div(class="comment")
+            //-     div(class="commenter-info")
+            //-         div(class="commenter-name")
+            //-         div(class="comment-date")
+            //-     div(class="comment-content")
