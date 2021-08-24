@@ -8,9 +8,9 @@ block content
   div.content
     div.signup-top
       h2 Join Meowdium
-    div.form
+    div.form-container
       +validationErrorSummary(errors)
-      form(action='/users/signup' method='post')
+      form(action='/users/signup' method='post' class='form')
         input(type='hidden' name='_csrf' value=csrfToken)
         +field('username', user.username, 'text', 'Username')
         +field('email', user.email, 'email', 'Email')
