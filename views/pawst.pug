@@ -1,7 +1,7 @@
-extends layout 
+extends layout
 include utils.pug
 
-block content 
+block content
   div(class='user-bio')
     div(class='user-name')= userName
     div(class='user-email')= email
@@ -15,7 +15,7 @@ block content
       if (locals.user && locals.user.id === post.userId )
         div(class='function-btns')
           form(action=`/pawsts/${post.id}/edit` method="get")
-            button(type="submit") Edit 
+            button(type="submit") Edit
           form(action=`/pawsts/${post.id}/delete` method="post")
             button(type="submit") Delete
     div(class="content")= post.content
@@ -30,8 +30,8 @@ block content
       div(id="pawments-container")
         if locals.authenticated
           div(class='new-pawment-box')
-            form(action=`/pawsts/${post.id}/pawments` method='post')
-              //- input(type='hidden' name='_csrf' value=csrfToken)
+            form(id='new-pawment-form' action=`/pawsts/${post.id}/pawments` method='post')
+              input(type='hidden' name='_csrf' value=csrfToken)
               +field('content', content, 'textarea', 'Pawment')
               div(class='')
                 button(id='comment-submit' type='submit' class='btn btn-primary') Submit
@@ -44,7 +44,8 @@ block content
             if locals.authenticated
               div(class="pawment-buttons")
                 form(action=`/pawments/${pawment.id}/edit` method="post")
-                  button(type="submit") Edit 
+                  button(type="submit") Edit
                 form(action=`/pawments/${pawment.id}/delete` method="post")
                   button(type="submit") Delete
           hr
+  script(type='module' src="/javascripts/index.js")

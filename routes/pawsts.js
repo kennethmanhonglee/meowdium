@@ -155,16 +155,17 @@ router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandl
   const { userId } = post;
   const user = await User.findByPk(userId);
   const { userName, email } = user;
-  
+
   if (validationErrors.isEmpty()) {
     await pawment.save();
     // return res.redirect('/');
-    
+
     return res.render('pawst', {
       post,
       userName,
       email,
-      pawments
+      pawments,
+      csrfToken: req.csrfToken()
     });
   } else {
     const errors = validationErrors.array().map((error) => error.msg);

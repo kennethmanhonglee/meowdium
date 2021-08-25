@@ -3,30 +3,14 @@ window.addEventListener("load", (event)=>{
 })
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const userCommentBox = document.querySelector("#content");
+  const userCommentForm = document.querySelector("#new-pawment-form");
   const userCommentSubmit = document.querySelector("#comment-submit");
-  userCommentSubmit.addEventListener("click", async(e) => {
+  userCommentForm.addEventListener("submit", async(e) => {
     e.preventDefault();
-    console.log("-_-_-_-_", window.location.href);
+    const formData = new FormData(userCommentForm);
+    for(let pair of formData.entries()){
+      console.log(pair);
+    }
     // await fetch("http://localhost:8080/pawst/:id(\\d+)/pawments")
   })
-  
-  try {
-    const res = await fetch("http://localhost:8080/pawsts/:id(\\d+)");
-    const { pawments } = await res.json();
-    
-    const pawmentsContainer = document.querySelector("#pawments-container");
-    const tweetsHtml = tweets.map(
-      ({ message }) => `
-      <div class="card">
-        <div class="card-body">
-          <p class="card-text">${message}</p>
-        </div>
-      </div>
-    `
-    );
-    tweetsContainer.innerHTML = tweetsHtml.join("");
-  } catch (e) {
-    console.error(e);
-  }
 });
