@@ -1,32 +1,39 @@
 extends layout
 include utils.pug
 
+block head
+  link(rel="stylesheet", href="/stylesheets/pawst.css")
+
 block content
-  div(class='user-bio')
-    div(class='user-name')= userName
-    div(class='user-email')= email
-  div(class='pawst-body')
-    div(class='title')= post.title
-    if (post.subtitle)
-      div(class='subtitle')= post.subtitle
-    div(class='post-info')
-      div(class='author')= userName
-      div(class='date')= post.updatedAt
-      if (locals.user && locals.user.id === post.userId )
-        div(class='function-btns')
-          form(action=`/pawsts/${post.id}/edit` method="get")
-            button(type="submit") Edit
-          form(action=`/pawsts/${post.id}/delete` method="post")
-            button(type="submit") Delete
-    div(class="content")= post.content
-    div(class="pawst-content-footer")
-      div(class="author")
-      div(class="likes-stats")
-        div(class="like-icon")
-        div(class="like-count")
-      div(class="pawments-stats")
-        div(class="pawment-icon")
-        div(class="pawment-count")
+  div(class='container')
+    div(class='pawst-body')
+      div(class='title')
+        h3(class='post-title')= post.title
+      if (post.subtitle)
+        div(class='subtitle')
+          h3(class='post-subtitle')= post.subtitle
+      div(class='author-utils')
+        div(class='author-date')
+          a(href=`/users/${post.userId}` class='post-author')= userName
+          div(class='date')= post.updatedAt.toDateString()
+        div(class='edit-delete')
+          if (locals.user && locals.user.id === post.userId )
+            div(class='function-btns')
+              form(action=`/pawsts/${post.id}/edit` method="get")
+                button(type="submit") Edit
+              form(action=`/pawsts/${post.id}/delete` method="post")
+                button(type="submit") Delete
+      hr
+      div(class="content")
+        pre(id='post-content')= post.content
+      div(class="pawst-content-footer")
+        div(class="author")= userName
+        div(class="likes-stats")
+          div(class="like-icon")
+          div(class="like-count")
+        div(class="pawments-stats")
+          div(class="pawment-icon")
+          div(class="pawment-count")
       div(id="pawments-container")
         if locals.authenticated
           div(class='new-pawment-box')

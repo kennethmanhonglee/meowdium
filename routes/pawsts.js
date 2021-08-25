@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const { check, validationResult } = require('express-validator')
+const { check, validationResult } = require('express-validator');
+const createError = require('http-errors');
 
 const { csrfProtection, asyncHandler } = require('./utils');
 
@@ -59,9 +60,11 @@ router.post("/", csrfProtection, pawstValidators, asyncHandler(async (req, res, 
   }
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const postId = parseInt(req.params.id, 10);
   const post = await Pawst.findByPk(postId);
+  if (!post) next(createError(404));
+
   const { userId } = post;
   const user = await User.findByPk(userId);
   const { userName, email } = user;
@@ -70,6 +73,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
     order: [['createdAt', 'DESC']],
   });
   return res.render('pawst', {
+    title: post.title,
     post,
     userName,
     email,
@@ -78,12 +82,12 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 }));
 
 router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
-  if( !res.locals.authenticated ) {
+  if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
   const postId = parseInt(req.params.id, 10);
   const post = await Pawst.findByPk(postId);
-  if( res.locals.user.id !== post.userId ){
+  if (res.locals.user.id !== post.userId) {
     return res.status(404).redirect('/');
   }
   return res.render('edit-pawst', {
@@ -94,17 +98,17 @@ router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
 }));
 
 router.post('/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(async (req, res) => {
-  if( !res.locals.authenticated ) {
+  if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
   const { title, subtitle, content } = req.body
   const postId = parseInt(req.params.id, 10);
   const post = await Pawst.findByPk(postId);
-  if( res.locals.user.id !== post.userId ){
+  if (res.locals.user.id !== post.userId) {
     return res.status(404).redirect('/');
   }
-  const validationErrors = validationResult( req );
-  if( validationErrors.isEmpty() ){
+  const validationErrors = validationResult(req);
+  if (validationErrors.isEmpty()) {
     await post.update({
       title,
       subtitle,

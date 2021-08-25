@@ -24,3 +24,8 @@ block content
         +field('confirmPassword', null , 'password', 'Confirm Password')
         div(class='')
             button(type='submit' class='btn btn-primary') Sign Up
+      p
+        form(action='/users/login/demo' method='post')
+          input(type='hidden' name='_csrf' value=csrfToken)
+          div(class='')
+            button(type='submit' class='btn btn-primary') Demo User
