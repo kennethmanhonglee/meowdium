@@ -11,7 +11,7 @@ block content
         div(class='post-info')
             div(class='author')= userName
             div(class='date')= post.updatedAt
-            if (locals.user.id === post.userId)
+            if (locals.user && locals.user.id === post.userId )
                 div(class='function-btns')
                     form(action=`/pawsts/${post.id}/edit` method="get")
                         button(type="submit") Edit 
