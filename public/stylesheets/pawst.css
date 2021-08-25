@@ -1,3 +1,15 @@
+.container {
+    display: flex;
+}
+
+.user-bio {
+    flex: 0 1 25%;
+}
+
+.pawst-body {
+    flex: 0 1 75%;
+}
+
 .content {
     width: 70%;
     border: 1px solid black;
