@@ -60,6 +60,7 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const { userName, email } = user;
 
   return res.render('pawst', {
+    title: post.title,
     post,
     userName,
     email
@@ -67,12 +68,12 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
 }));
 
 router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
-  if( !res.locals.authenticated ) {
+  if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
   const postId = parseInt(req.params.id, 10);
   const post = await Pawst.findByPk(postId);
-  if( res.locals.user.id !== post.userId ){
+  if (res.locals.user.id !== post.userId) {
     return res.status(404).redirect('/');
   }
   return res.render('edit-pawst', {
@@ -83,17 +84,17 @@ router.get('/:id(\\d+)/edit', csrfProtection, asyncHandler(async (req, res) => {
 }));
 
 router.post('/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(async (req, res) => {
-  if( !res.locals.authenticated ) {
+  if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
   const { title, subtitle, content } = req.body
   const postId = parseInt(req.params.id, 10);
   const post = await Pawst.findByPk(postId);
-  if( res.locals.user.id !== post.userId ){
+  if (res.locals.user.id !== post.userId) {
     return res.status(404).redirect('/');
   }
-  const validationErrors = validationResult( req );
-  if( validationErrors.isEmpty() ){
+  const validationErrors = validationResult(req);
+  if (validationErrors.isEmpty()) {
     await post.update({
       title,
       subtitle,

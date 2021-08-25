@@ -21,12 +21,33 @@
     padding: 5% 10%;
 }
 
-.post-title {
-    font-weight: bolder;
+.title, .subtitle, .author {
+    width: 85%;
+    word-wrap: normal;
 }
 
-.subtitle {
+.post-title {
+    font-weight: bolder;
+    font-size: 3rem;
+    text-align: start;
+}
+
+.post-author {
+    font-size: 1.5rem;
+    text-align: start;
+    text-decoration: none;
+    color: rgb(255, 138, 236);
+    text-transform: capitalize;
+}
+
+.post-author:hover {
+    text-decoration: underline;
+}
+
+.post-subtitle {
     color: grey;
+    font-size: 2rem;
+    text-align: start;
 }
 
 hr {
@@ -39,10 +60,10 @@ hr {
     box-sizing: border-box;
 }
 
+
+
 #post-content {
     width: inherit;
     white-space: pre-wrap;
     font-family: Arial, Helvetica, sans-serif;
-
-
 }
