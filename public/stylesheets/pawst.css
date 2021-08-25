@@ -21,6 +21,14 @@
     padding: 5% 10%;
 }
 
+.post-title {
+    font-weight: bolder;
+}
+
+.subtitle {
+    color: grey;
+}
+
 hr {
     width: 85%
 }
