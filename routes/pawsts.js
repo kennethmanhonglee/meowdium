@@ -4,7 +4,8 @@ const { check, validationResult } = require('express-validator')
 
 const { csrfProtection, asyncHandler } = require('./utils');
 
-const { User, Pawst } = require('../db/models');
+const { User, Pawst, Pawment } = require('../db/models');
+// const pawments = require('./pawments');
 
 const pawstValidators = [
   check('title')
@@ -13,6 +14,12 @@ const pawstValidators = [
   check('content')
     .exists({ checkFalsy: true })
     .withMessage('Content can\'t be empty.')
+];
+
+const pawmentValidators = [
+  check('content')
+    .exists({ checkFalsy: true })
+    .withMessage('Pawment can\'t be empty.')
 ];
 
 router.get('/new', csrfProtection, asyncHandler(async (req, res, next) => {
@@ -58,11 +65,13 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   const { userId } = post;
   const user = await User.findByPk(userId);
   const { userName, email } = user;
-
+  const pawments = await Pawment.findAll({ where: {pawstId: postId} });
+  console.log("_-_-_-_-",pawments);
   return res.render('pawst', {
     post,
     userName,
-    email
+    email,
+    pawments
   })
 }));
 
@@ -127,5 +136,30 @@ router.post('/:id(\\d+)/delete', asyncHandler(async (req, res) => {
   return res.redirect(`/users/${userId}`)
 
 }));
+
+router.post('/:id(\\d+)/pawments', pawmentValidators, asyncHandler(async(req, res) => {
+  if( !res.locals.authenticated ) {
+    return res.redirect('/users/login');
+  }
+  const { content } = req.body;
+  const postId = parseInt(req.params.id, 10);
+  const post = await Pawst.findByPk(postId);
+  const pawment = await Pawment.build( {content, userId: req.session.auth.userId, pawstId: postId} )
+  const validationErrors = validationResult(req);
+  if (validationErrors.isEmpty()) {
+    await pawment.save();
+    // return res.redirect('/');
+    return res.render('pawst', {
+      post,
+      content
+    });
+  } else {
+    const errors = validationErrors.array().map((error) => error.msg);
+    return res.render('pawst', {
+      errors
+    })
+  }
+}));
+
 
 module.exports = router;
