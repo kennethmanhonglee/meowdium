@@ -5,10 +5,12 @@ block nav-bar
   div(class='nav-bar')
     div(class='logo')
       a(href='/' class='logo-link')
-    div(class='logged-in-user')
-      a(href="/pawsts/new" class='btn btn-pawst') Pawst
-      form(action='/users/logout' method='post')
-        button(class='btn btn-logout' type='submit') Logout
+    div(class='spacer')
+    div(class='user-utils')
+      div(class='logged-in-user')
+        a(href="/pawsts/new" class='btn btn-pawst') Pawst
+        form(action='/users/logout' method='post')
+          button(class='btn btn-logout' type='submit') Logout
 
 block content
   +validationErrorSummary(errors)
