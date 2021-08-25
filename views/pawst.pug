@@ -6,8 +6,9 @@ block head
 block content 
     div(class='container')
         div(class='user-bio')
-            div(class='user-name')= userName
-            div(class='user-email')= email
+            div(class='bio-container')
+                div(class='user-name')= userName
+                div(class='user-email')= email
         div(class='pawst-body')
             div(class='title')= post.title
             if (post.subtitle)
@@ -24,7 +25,7 @@ block content
                 pre(id='post-content')= post.content
             div(class="pawst-content-footer")
                 div(class="author")= userName
-                div(class='date')= post.updatedAt.toString()
+                div(class='date')= post.updatedAt.toDateString()
                 div(class="likes-stats")
                     div(class="like-icon")
                     div(class="like-count")

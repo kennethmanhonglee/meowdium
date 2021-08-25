@@ -6,6 +6,17 @@
     flex: 0 1 25%;
 }
 
+.bio-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.user-name, .user-email {
+    padding: 15px;
+}
+
 .pawst-body {
     flex: 0 1 75%;
 }
