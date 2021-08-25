@@ -189,6 +189,15 @@ router.post('/login', csrfProtection, loginValidators, asyncHandler(async (req, 
   }
 }));
 
+
+router.post('/login/demo', asyncHandler(async (req, res) => {
+  const demoUser = await User.findByPk(1);
+
+  loginUser(req, res, demoUser);
+  return req.session.save(() => res.redirect("/"));
+
+}))
+
 router.post('/logout', (req, res) => {
   logoutUser(req, res);
   return req.session.save(() => res.redirect("/"));
