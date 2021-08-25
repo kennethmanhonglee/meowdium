@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const { check, validationResult } = require('express-validator')
+const { check, validationResult } = require('express-validator');
+const createError = require('http-errors');
 
 const { csrfProtection, asyncHandler } = require('./utils');
 
@@ -52,9 +53,11 @@ router.post("/", csrfProtection, pawstValidators, asyncHandler(async (req, res, 
   }
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
+router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
   const postId = parseInt(req.params.id, 10);
   const post = await Pawst.findByPk(postId);
+  if (!post) next(createError(404));
+
   const { userId } = post;
   const user = await User.findByPk(userId);
   const { userName, email } = user;
