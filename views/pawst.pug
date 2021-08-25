@@ -27,18 +27,24 @@ block content
       div(class="pawments-stats")
         div(class="pawment-icon")
         div(class="pawment-count")
-      div(class="pawments-container")
+      div(id="pawments-container")
         if locals.authenticated
           div(class='new-pawment-box')
             form(action=`/pawsts/${post.id}/pawments` method='post')
               //- input(type='hidden' name='_csrf' value=csrfToken)
               +field('content', content, 'textarea', 'Pawment')
               div(class='')
-                button(type='submit' class='btn btn-primary') Submit
+                button(id='comment-submit' type='submit' class='btn btn-primary') Submit
         each pawment in pawments
           div(class="pawment")
             div(class="pawmenter-info")
               div(class="commenter-name")= userName
               div(class="pawment-date")= pawment.updatedAt.toDateString()
             div(class="pawment-content")= pawment.content
+            if locals.authenticated
+              div(class="pawment-buttons")
+                form(action=`/pawments/${pawment.id}/edit` method="post")
+                  button(type="submit") Edit 
+                form(action=`/pawments/${pawment.id}/delete` method="post")
+                  button(type="submit") Delete
           hr
