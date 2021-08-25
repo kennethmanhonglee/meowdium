@@ -1,0 +1,10 @@
+.content {
+    width: 70%;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#post-content {
+    width: inherit;
+    white-space: pre-wrap;
+}
