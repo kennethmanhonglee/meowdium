@@ -1,7 +1,7 @@
 /* Signup Styling */
 
 .signup-top {
-  padding: 30px 0;
+
 }
 
 .form-container {
@@ -16,16 +16,6 @@
 
 .form-container input.form-control {
   min-width: 300px;
-}
-
-.form-container .btn.btn-primary {
-  width: 200px;
-  background-color: #292929;
-  color: #FFFFFF;
-}
-
-.form-container .btn.btn-primary:hover {
-  background-color: #080808;
 }
 
 .form {

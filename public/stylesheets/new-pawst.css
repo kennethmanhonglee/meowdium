@@ -1,0 +1,7 @@
+/* New Pawst Styling */
+
+#content {
+  resize: vertical;
+  min-height: 300px;
+  min-width: 500px;
+}

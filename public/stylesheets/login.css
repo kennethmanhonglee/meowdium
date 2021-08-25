@@ -1,0 +1,9 @@
+/* Login Styling */
+
+.login-top {
+  margin: 50px 0 25px;
+}
+
+.form-container .form-group:nth-last-child(2) {
+  margin-bottom: 10px;
+}

@@ -1,16 +1,24 @@
-extends layout 
-include utils 
+extends layout
+include utils
+
+block head
+  link(rel='stylesheet' href='/stylesheets/login.css')
 
 block nav-bar
-    div(class='nav-bar')
-        div(class='logo')
-            a(href='/' class='logo-link')
+  div(class='nav-bar')
+    div(class='logo')
+      a(href='/' class='logo-link')
 
-block content 
-    +validationErrorSummary(errors)
-    form(action='/users/login' method='post')
-        input(type='hidden' name='_csrf' value=csrfToken)
-        +field('userName', user.username, 'text', 'Username')
-        +field('password', null, 'password', 'Password')
-        div(class='')
+block content
+  div.content
+    div.login-top.top-section
+      h2 Welcome back.
+    div.login-bottom
+      div.form-container
+        +validationErrorSummary(errors)
+        form(action='/users/login' method='post')
+          input(type='hidden' name='_csrf' value=csrfToken)
+          +field('userName', user.username, 'text', 'Username')
+          +field('password', null, 'password', 'Password')
+          div(class='')
             button(type='submit' class='btn btn-primary') Login
