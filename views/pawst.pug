@@ -1,5 +1,8 @@
 extends layout 
 
+block head 
+    //- link(rel="stylesheet", href="/stylesheets/pawst.css")
+
 block content 
     div(class='user-bio')
         div(class='user-name')= userName
@@ -17,7 +20,8 @@ block content
                         button(type="submit") Edit 
                     form(action=`/pawsts/${post.id}/delete` method="post")
                         button(type="submit") Delete
-        div(class="content")= post.content
+        div(class="content")
+            pre= post.content
         div(class="pawst-content-footer")
             div(class="author")
             div(class="likes-stats")
