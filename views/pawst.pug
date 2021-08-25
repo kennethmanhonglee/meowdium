@@ -11,11 +11,11 @@ block content
             if (post.subtitle)
                 div(class='subtitle')
                     h3(class='post-subtitle')= post.subtitle
-            div(class='user-utils')
-                div(class='author')
+            div(class='author-utils')
+                div(class='author-date')
                     a(href=`/users/${post.userId}` class='post-author')= userName
-                div(class='date')= post.updatedAt.toDateString()
-                div(class='post-info')
+                    div(class='date')= post.updatedAt.toDateString()
+                div(class='edit-delete')
                     if (locals.user && locals.user.id === post.userId )
                         div(class='function-btns')
                             form(action=`/pawsts/${post.id}/edit` method="get")

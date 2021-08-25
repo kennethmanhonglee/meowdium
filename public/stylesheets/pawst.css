@@ -21,34 +21,65 @@
     padding: 5% 10%;
 }
 
-.title, .subtitle, .author {
+.title, .subtitle {
     width: 85%;
     word-wrap: normal;
 }
 
 .post-title {
     font-weight: bolder;
-    font-size: 3rem;
+    font-size: 2rem;
+    text-align: start;
+}
+
+.post-subtitle {
+    color: grey;
+    font-size: 1.5rem;
     text-align: start;
 }
 
 .post-author {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     text-align: start;
     text-decoration: none;
     color: rgb(255, 138, 236);
     text-transform: capitalize;
 }
 
+.date {
+    font-size: 1.1rem;
+}
+
+.author-utils {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+}
+
+.author-date {
+    display: flex;
+
+}
+
+.post-author {
+    margin-right: 30px;
+}
+
+.edit-delete {
+    display: flex;
+}
+
+
+.function-btns {
+    display: flex;
+}
+
+
 .post-author:hover {
     text-decoration: underline;
 }
 
-.post-subtitle {
-    color: grey;
-    font-size: 2rem;
-    text-align: start;
-}
+
 
 hr {
     width: 85%
