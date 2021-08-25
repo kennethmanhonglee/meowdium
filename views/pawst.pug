@@ -5,10 +5,6 @@ block head
 
 block content 
     div(class='container')
-        div(class='user-bio')
-            div(class='bio-container')
-                div(class='user-name')= userName
-                div(class='user-email')= email
         div(class='pawst-body')
             div(class='title')= post.title
             if (post.subtitle)
@@ -21,6 +17,7 @@ block content
                             button(type="submit") Edit 
                         form(action=`/pawsts/${post.id}/delete` method="post")
                             button(type="submit") Delete
+            hr
             div(class="content")
                 pre(id='post-content')= post.content
             div(class="pawst-content-footer")
