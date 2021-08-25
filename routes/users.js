@@ -196,61 +196,6 @@ router.post('/login/demo', asyncHandler(async (req, res) => {
   loginUser(req, res, demoUser);
   return req.session.save(() => res.redirect("/"));
 
-  // // validate userName and password
-  // const validationErrors = validationResult(req);
-  // if (validationErrors.isEmpty()) {
-  //   //try to find user
-  //   let user = await User.findOne({
-  //     where: {
-  //       userName: userName,
-  //     },
-  //   });
-
-    // if (user) {
-    //   // check pw
-    //   const matchingPW = await bcrypt.compare(
-    //     password,
-    //     user.hashedPassword.toString()
-    //   );
-    //   if (matchingPW) {
-    //     // happy path
-    //     loginUser(req, res, user);
-    //     return req.session.save(() => res.redirect("/"));
-  //     } else {
-  //       // userName right, pw wrong
-  //       const errMsg = "Invalid Username/Password";
-  //       errors.push(errMsg);
-  //       return res.render("user-login", {
-  //         title: "Login",
-  //         errors,
-  //         csrfToken: req.csrfToken(),
-  //         user,
-  //       });
-  //     }
-  //   } else {
-  //     // cannot find user with userName
-  //     user = await User.build();
-  //     const errMsg = "Invalid Username/Password";
-  //     errors.push(errMsg);
-  //     return res.render("user-login", {
-  //       title: "Login",
-  //       errors,
-  //       csrfToken: req.csrfToken(),
-  //       user,
-  //     });
-  //   }
-  // } else {
-  //   // something wrong with userName/password
-  //   user = await User.build();
-  //   errors = validationErrors.array().map((error) => error.msg);
-  //   return res.render("user-login", {
-  //     title: "Login",
-  //     errors,
-  //     csrfToken: req.csrfToken(),
-  //     user,
-  //   });
-  // }
-
 }))
 
 router.post('/logout', (req, res) => {
