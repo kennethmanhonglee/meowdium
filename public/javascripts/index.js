@@ -20,13 +20,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     const {
+      id,
       content,
       userName,
-      updatedAt } = await res.json();
-
+      createdAt } = await res.json();
 
     const pawmentsList = document.getElementById('pawments-list');
-    
+    const pawmentDiv = document.createElement('div');
+    pawmentDiv.setAttribute("class", "pawment");
+    pawmentDiv.innerHTML = `
+      <div class="pawmenter-info">
+        <div class="commenter-name">${userName}</div>
+        <div class="pawment-date">${createdAt}</div>
+      </div>
+      <div class="pawment-content">${content}</div>
+      <div class="pawment-buttons">
+        <form action="/pawments/${id}/edit" method="post">
+          <button type="submit">Edit</button>
+        </form>
+        <form action="/pawments/${id}/delete" method="post">
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    `
+
+    pawmentsList.prepend(pawmentDiv);
 
 
   } catch(err) {

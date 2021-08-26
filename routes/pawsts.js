@@ -152,16 +152,18 @@ router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandl
   const postId = parseInt(req.params.id, 10);
   const pawment = await Pawment.build( {content, userId: req.session.auth.userId, pawstId: postId} )
   const validationErrors = validationResult(req);
-  const { userId, updatedAt } = pawment;
-  const user = await User.findByPk(userId);
+  
+  const user = await User.findByPk(req.session.auth.userId);
   const { userName } = user;
 
   if (validationErrors.isEmpty()) {
     await pawment.save();
+    const { id, createdAt } = pawment;
     return res.status(201).json({
+      id,
       content,
       userName,
-      updatedAt
+      createdAt: createdAt.toDateString()
     })
   } else {
     return res.status(406).json({
