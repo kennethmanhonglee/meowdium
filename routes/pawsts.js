@@ -60,7 +60,7 @@ router.post("/", csrfProtection, pawstValidators, asyncHandler(async (req, res, 
   }
 }))
 
-router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
+router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => {
   const postId = parseInt(req.params.id, 10);
   const post = await Pawst.findByPk(postId);
   if (!post) next(createError(404));
@@ -77,7 +77,8 @@ router.get('/:id(\\d+)', asyncHandler(async (req, res, next) => {
     post,
     userName,
     email,
-    pawments
+    pawments,
+    csrfToken: req.csrfToken()
   })
 }));
 
@@ -143,68 +144,58 @@ router.post('/:id(\\d+)/delete', asyncHandler(async (req, res) => {
 
 }));
 
-// router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandler(async(req, res) => {
-//   if( !res.locals.authenticated ) {
-//     return res.redirect('/users/login');
-//   }
-//   const { content } = req.body;
-//   const postId = parseInt(req.params.id, 10);
-//   const post = await Pawst.findByPk(postId);
-//   const pawment = await Pawment.build( {content, userId: req.session.auth.userId, pawstId: postId} )
-//   const validationErrors = validationResult(req);
-//   const pawments = await Pawment.findAll({
-//     where: {pawstId: postId},
-//     order: [['createdAt', 'DESC']]
-//   });
-//   const { userId } = post;
-//   const user = await User.findByPk(userId);
-//   const { userName, email } = user;
+router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandler(async(req, res) => {
+  if( !res.locals.authenticated ) {
+    return res.redirect('/users/login');
+  }
+  const { content } = req.body;
+  const postId = parseInt(req.params.id, 10);
+  const pawment = await Pawment.build( {content, userId: req.session.auth.userId, pawstId: postId} )
+  const validationErrors = validationResult(req);
+  const { userId, updatedAt } = pawment;
+  const user = await User.findByPk(userId);
+  const { userName } = user;
 
-//   if (validationErrors.isEmpty()) {
-//     await pawment.save();
-//     // return res.redirect('/');
+  if (validationErrors.isEmpty()) {
+    await pawment.save();
+    return res.status(201).json({
+      content,
+      userName,
+      updatedAt
+    })
+  } else {
+    return res.status(406).json({
+      emptyComment: true
+    });
+  }
+}));
 
-//     return res.render('pawst', {
-//       post,
-//       userName,
-//       email,
-//       pawments,
-//       csrfToken: req.csrfToken()
-//     });
-//   } else {
-//     const errors = validationErrors.array().map((error) => error.msg);
-//     return res.render('pawst', {
-//       errors
-//     })
-//   }
-// }));
+router.post('/pawments/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(async (req, res) => {
+  if( !res.locals.authenticated ) {
+    return res.redirect('/users/login');
+  }
+  const { content } = req.body
+  const pawmentId = parseInt(req.params.id, 10);
+  const pawment = await Pawment.findByPk(pawmentId);
 
-// router.post('/pawments/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(async (req, res) => {
-//   if( !res.locals.authenticated ) {
-//     return res.redirect('/users/login');
-//   }
-//   const { content } = req.body
-//   const pawmentId = parseInt(req.params.id, 10);
-//   const pawment = await Pawment.findByPk(pawmentId);
-
-//   if( res.locals.user.id !== pawment.userId ){
-//     return res.status(404).redirect('/');
-//   }
-//   const validationErrors = validationResult( req );
-//   if( validationErrors.isEmpty() ){
-//     await pawment.update({
-//       content
-//     })
-//     return res.redirect(`/pawsts/${pawment.pawstId}`);
-//   } else {
-//     const errors = validationErrors.array().map((error) => error.msg);
-//     return res.render('pawst', {
-//       post,
-//       pawments,
-//       errors,
-//       csrfToken: req.csrfToken()
-//     })
-//   }
-// }));
+  if( res.locals.user.id !== pawment.userId ){
+    return res.status(404).redirect('/');
+  }
+  const validationErrors = validationResult( req );
+  if( validationErrors.isEmpty() ){
+    await pawment.update({
+      content
+    })
+    return res.redirect(`/pawsts/${pawment.pawstId}`);
+  } else {
+    const errors = validationErrors.array().map((error) => error.msg);
+    return res.render('pawst', {
+      post,
+      pawments,
+      errors,
+      csrfToken: req.csrfToken()
+    })
+  }
+}));
 
 module.exports = router;
