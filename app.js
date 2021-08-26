@@ -10,6 +10,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const pawstsRouter = require('./routes/pawsts');
 const pawmentsRouter = require('./routes/pawments');
+const apisRouter = require('./routes/api/apis');
 const { restoreUser } = require('./auth');
 
 const app = express();
@@ -45,6 +46,7 @@ store.sync();
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/pawsts', pawstsRouter);
+app.use('/api', apisRouter);
 // app.use('/pawments', pawmentsRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
