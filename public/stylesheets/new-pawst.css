@@ -1,5 +1,14 @@
 /* New Pawst Styling */
 
+
+input.form-control {
+  min-width: 500px;
+}
+
+.form-container .form-group:nth-last-child(2) {
+  margin-bottom: 10px;
+}
+
 #content {
   resize: vertical;
   min-height: 300px;
