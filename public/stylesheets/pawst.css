@@ -98,3 +98,15 @@ hr {
     white-space: pre-wrap;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.like-btn {
+    color: rgba(255, 0, 0, 0.3);
+}
+
+.like-btn:hover {
+    color: rgba(255, 0, 0, 0.5);
+}
+
+.clicked {
+    color: rgba(255, 0, 0, 0.8);
+}

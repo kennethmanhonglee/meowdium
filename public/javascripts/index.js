@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
   //   const pawmentsList = document.getElementById('pawments-list');
-    
+
 
 
   // } catch(err) {
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // }
   // });
 
-  const likeButton = document.querySelector('#like-btn');
+  const likeButton = document.querySelector('.like-btn');
   const likeDisplay = document.querySelector('.like-display');
   likeButton.addEventListener('click', async (e) => {
     const apiPath = `${window.location.origin}/api${window.location.pathname}/catnips`
@@ -50,12 +50,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (deleted) {
       // show unlike animation
-      // decrement like display
       likeDisplay.textContent = catnipsCount;
+      likeButton.classList.remove('clicked');
     } else {
       // show like animation
-      // increment like display
       likeDisplay.textContent = catnipsCount;
+      likeButton.classList.add('clicked');
     }
   });
 
