@@ -93,7 +93,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pawmentId = ele.childNodes[0].lastChild.value;
       const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
       const currDeleteButton = document.querySelector(`form[action='/pawments/${pawmentId}/delete'] button`)
-      
+      currDeleteButton.addEventListener(apiPath, async (e) => {
+        e.preventDefault();
+        // TODO - finish writing fetch request to delete route
+      })
     }
   }
 });
