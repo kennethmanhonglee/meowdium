@@ -4,6 +4,7 @@ const router = express.Router();
 const { User, Pawst, Catnip } = require('../../db/models');
 const { csrfProtection, asyncHandler } = require('../utils');
 
+// todo - add csrfProtection
 router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
     // TODO - verify that the user is logged in
     const pawstId = parseInt(req.params.id, 10);
@@ -27,7 +28,8 @@ router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
     }
 }));
 
-// how would we find the catnips id in frontend?
+// TODO - use userId and pawstId to find it instead
+// userId in session, pawstId can be found and attached to body of delete
 router.delete('/catnips/:id(\\d+)', asyncHandler(async (req, res) => {
     // TODO - verify that the user is logged in
     const catnipId = parseInt(req.params.id, 10);
