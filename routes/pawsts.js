@@ -5,7 +5,7 @@ const createError = require('http-errors');
 
 const { csrfProtection, asyncHandler } = require('./utils');
 
-const { User, Pawst, Pawment } = require('../db/models');
+const { User, Pawst, Pawment, Catnip } = require('../db/models');
 // const pawments = require('./pawments');
 
 const pawstValidators = [
@@ -72,12 +72,15 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     where: {pawstId: postId},
     order: [['createdAt', 'DESC']],
   });
+  const catnipsCount = await Catnip.count();
+
   return res.render('pawst', {
     title: post.title,
     post,
     userName,
     email,
     pawments,
+    catnipsCount,
     csrfToken: req.csrfToken()
   })
 }));
