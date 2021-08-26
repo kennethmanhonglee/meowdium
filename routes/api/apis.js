@@ -18,17 +18,26 @@ router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
             userId
         }
     })
+    let catnipsCount = await Catnip.count();
 
     if (existingCatnip) {
         // unlike post - delete catnip from db, send back 'deleted'
         await existingCatnip.destroy();
-        return res.status(200).json('deleted');
+        catnipsCount--;
+        return res.status(200).json({
+            catnipsCount,
+            deleted: true
+        });
     } else {
         const newCatnip = await Catnip.create({
             pawstId,
             userId
         })
-        return res.status(201).json(newCatnip);
+        catnipsCount++;
+        return res.status(201).json({
+            catnipsCount,
+            deleted: false
+        });
     }
 }));
 
