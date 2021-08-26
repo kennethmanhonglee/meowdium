@@ -1,27 +1,37 @@
-const { placeholder } = require("sequelize/types/lib/operators");
+document.addEventListener("DOMContentLoaded", async () => {
+  const userCommentForm = document.querySelector("#new-pawment-form");
+  const userCommentSubmit = document.querySelector("#comment-submit");
+  userCommentForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(userCommentForm);
+    for (let pair of formData.entries()) {
+      console.log(pair);
+    }
+    // await fetch("http://localhost:8080/pawst/:id(\\d+)/pawments")
+  });
 
-document.addEventListener('DOMContentLoaded', () => {
-  document
-    .getElementById('new-pawment-form')
-    .addEventListener('submit', (event) => {
-      event.preventDefault();
-      const myForm = event.target;
-      const formData = new FormData(myForm);
-      let obj = {};
-
-      for (let key of formData.keys()) {
-        obj[key] = formData.get(key);
-        console.log(obj)
-      }
-      //send the request with the formdata
-      const req = new Request(`http://localhost:8080/pawsts/${placeholder}`, {
-        headers: { 'Content-Type': 'application/json', "Accept": "application/json" },
-        body: JSON.stringify(obj),
-        method: 'POST',
-      });
-
-      fetch(req)
-        .then((res) => res.json())
-        .catch(console.warn);
+  const likeButton = document.querySelector('#like-btn');
+  likeButton.addEventListener('click', async (e) => {
+    const apiPath = `${window.location.origin}/api${window.location.pathname}/catnips`
+    const res = await fetch(apiPath, {
+      header: 'application/json',
+      body: {
+        like: 'leelooo'
+      },
+      method: 'POST'
     })
+
+    const { deleted, catnipsCount } = await res.json();
+
+    if (deleted) {
+      // show unlike animation
+      // decrement like display
+      console.log('DELETED!!!!')
+    } else {
+      // show like animation
+      // increment like display
+      console.log('LIKED!!!!!!')
+    }
+  });
+
 });
