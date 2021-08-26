@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const userCommentForm = document.querySelector("#new-pawment-form");
-
+  const commentTextArea = document.querySelector('#content')
   userCommentForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const formData = new FormData(userCommentForm);
     const content = formData.get('content');
     const _csrf = formData.get('_csrf'); // TODO: test var naming
     const body = { content, _csrf };
+    commentTextArea.value = '';
+
     try{
     const res = await fetch(`${window.location.href}/pawments`, { // TODO: change to API once functioning
       method: "POST",
