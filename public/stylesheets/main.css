@@ -44,6 +44,7 @@ form .btn.btn-primary:hover {
   display: flex;
   min-height: 75px;
   background-color: #FFFFFF;
+  padding: 5px 20px;
   border: 1px solid #000000;
   border-width: 0 0 1px;
   font-family: Arial, Helvetica, sans-serif;
