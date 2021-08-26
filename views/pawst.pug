@@ -54,6 +54,7 @@ block content
               div(class="pawmenter-info")
                 div(class="commenter-name")= userName
                 div(class="pawment-date")= pawment.updatedAt.toDateString()
+                input(type="hidden", value=pawment.id, id=pawment.id)
               div(class="pawment-content")= pawment.content
               if locals.authenticated && locals.user.id === pawment.userId
                 div(class="pawment-buttons")

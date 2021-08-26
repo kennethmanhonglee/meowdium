@@ -81,4 +81,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+
+  // deleting pawments
+  const pawmentsList = document.querySelector('#pawments-list');
+  for (let ele of pawmentsList.childNodes) {
+    if (ele.childNodes.length) { //not an hr
+      // ele is a pawment div
+      // ele.childNodes - div.pawmenter-info, div.pawment-content, div.pawment-button
+      // lastchild - div.pawment-buttons
+      // value - hidden input that holds pawmentId rendered from get /pawsts/:id
+      const pawmentId = ele.childNodes[0].lastChild.value;
+      const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
+      const currDeleteButton = document.querySelector(`form[action='/pawments/${pawmentId}/delete'] button`)
+      
+    }
+  }
 });

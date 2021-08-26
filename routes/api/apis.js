@@ -46,7 +46,16 @@ router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
         return res.status(404).json('You are not logged in!');
     }
 
-    
+    const pawmentId = parseInt(req.params.id, 10);
+
+    if (res.locals.user.id === pawmentToDelete.userId) {
+        const pawmentToDelete = await Pawment.findByPk(pawmentId);
+        await pawmentToDelete.destroy();
+        return res.status(200).json(pawmentId);
+    } else {
+        return res.status(404).json('You are not the user!');
+    }
+
 }))
 
 
