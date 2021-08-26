@@ -55,7 +55,7 @@ block content
                 div(class="commenter-name")= userName
                 div(class="pawment-date")= pawment.updatedAt.toDateString()
               div(class="pawment-content")= pawment.content
-              if locals.authenticated
+              if locals.authenticated && locals.user.id === pawment.userId
                 div(class="pawment-buttons")
                   form(action=`/pawments/${pawment.id}/edit` method="post")
                     button(type="submit") Edit

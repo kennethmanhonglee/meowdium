@@ -41,6 +41,13 @@ router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
     }
 }));
 
+router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
+    if (!res.locals.authenticated) {
+        return res.status(404).json('You are not logged in!');
+    }
+
+    
+}))
 
 
 module.exports = router;

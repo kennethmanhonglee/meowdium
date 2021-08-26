@@ -9,28 +9,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     const body = { content, _csrf };
     commentTextArea.value = '';
 
-    try{
-    const res = await fetch(`${window.location.href}/pawments`, { // TODO: change to API once functioning
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
-    });
+    try {
+      const res = await fetch(`${window.location.href}/pawments`, { // TODO: change to API once functioning
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json" },
+      });
 
 
-    if (!res.ok) {
-      throw 'Comment can\'t be empty.'
-    };
+      if (!res.ok) {
+        throw 'Comment can\'t be empty.'
+      };
 
-    const {
-      id,
-      content,
-      userName,
-      createdAt } = await res.json();
+      const {
+        id,
+        content,
+        userName,
+        createdAt } = await res.json();
 
-    const pawmentsList = document.getElementById('pawments-list');
-    const pawmentDiv = document.createElement('div');
-    pawmentDiv.setAttribute("class", "pawment");
-    pawmentDiv.innerHTML = `
+      const pawmentsList = document.getElementById('pawments-list');
+      const pawmentDiv = document.createElement('div');
+      pawmentDiv.setAttribute("class", "pawment");
+      // TODO - change from innerHTML to textContent or something
+      pawmentDiv.innerHTML = `
       <div class="pawmenter-info">
         <div class="commenter-name">${userName}</div>
         <div class="pawment-date">${createdAt}</div>
@@ -46,13 +47,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     `
 
-    pawmentsList.prepend(pawmentDiv);
+      pawmentsList.prepend(pawmentDiv);
 
 
 
-  } catch(err) {
-    alert(err)
-  }
+    } catch (err) {
+      alert(err)
+    }
   });
 
   const likeButton = document.querySelector('.like-btn');
