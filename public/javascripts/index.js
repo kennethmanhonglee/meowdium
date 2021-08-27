@@ -62,13 +62,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       pawmentDeleteButton.setAttribute('value', id);
       pawmentDeleteButton.textContent = 'Delete';
       pawmentDeleteButton.addEventListener('click', async (e) => {
-        e.preventDefault();
-
-        // to help us get Id from target
-        const currDeleteButtonClass = e.target.value;
-        const indexOfLastDash = currDeleteButtonClass.lastIndexOf('-');
-        const pawmentId = currDeleteButtonClass.slice(indexOfLastDash + 1);
-        const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
+        const apiPath = `${window.location.origin}/api/pawments/${id}/delete`;
 
         const res = await fetch(apiPath, {
           method: 'POST',
@@ -81,17 +75,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         // dynamically remove comment
-        const pawmentDivToDelete = document.querySelector(`.pawment-${pawmentId}`);
-        const hrToDelete = document.querySelector(`.hr-${pawmentId}`);
+        const pawmentDivToDelete = document.querySelector(`.pawment-${id}`);
         pawmentDivToDelete.remove();
-        hrToDelete.remove();
       });
       pawmentButtonsDiv.append(pawmentEditButton, pawmentDeleteButton);
       pawmentDiv.append(pawmentButtonsDiv);
 
-      const hr = document.createElement('hr');
-      hr.setAttribute('class', `hr-${id}`)
-      pawmentDiv.append(hr);
       pawmentsList.prepend(pawmentDiv);
 
 
@@ -131,20 +120,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const pawmentsList = document.querySelector('#pawments-list');
   for (let ele of pawmentsList.childNodes) {
     // ele is a pawment div
-    if (ele.childNodes.length === 4) { //not an hr
+    if (ele.childNodes.length === 3) { //not an hr
       // ele.childNodes - div.pawmenter-info, div.pawment-content, div.pawment-button
       // lastchild - div.pawment-buttons
       // value - hidden input that holds pawmentId rendered from get /pawsts/:id
       const pawmentId = ele.childNodes[0].lastChild.id;
       const currDeleteButton = document.querySelector(`.delete-button-${pawmentId}`);
       currDeleteButton.addEventListener('click', async (e) => {
-        e.preventDefault();
-
-        // these next 3 lines are to get pawment Id, this function cant reach anything outside of the addEventListener due to scoping
-        const currDeleteButtonClass = e.target.classList.value;
-        const indexOfLastDash = currDeleteButtonClass.lastIndexOf('-');
-        const pawmentId = currDeleteButtonClass.slice(indexOfLastDash + 1);
-
         const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
         const res = await fetch(apiPath, {
           method: 'POST',
@@ -158,9 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // dynamically remove comment
         const pawmentDivToDelete = document.querySelector(`.pawment-${pawmentId}`);
-        const hrToDelete = document.querySelector(`.hr-${pawmentId}`);
         pawmentDivToDelete.remove();
-        hrToDelete.remove();
       })
     }
   }
