@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pawmentsList = document.getElementById('pawments-list');
 
       const pawmentDiv = document.createElement('div');
-      pawmentDiv.setAttribute("class", `pawment-${id}`);
+      pawmentDiv.setAttribute("class", `pawment pawment-${id}`);
 
       const pawmenterInfoDiv = document.createElement('div');
       pawmenterInfoDiv.setAttribute('class', 'pawmenter-info');
