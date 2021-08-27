@@ -116,6 +116,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
+  //possibly querySelectorAll the delete buttons with SAME CLASS names
+  // iterate through THAT list, and add evnet listeners to each 
 
   // deleting pawments
   const pawmentsList = document.querySelector('#pawments-list');
@@ -128,7 +130,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pawmentId = ele.childNodes[0].lastChild.id;
       const currDeleteButton = document.querySelector(`.delete-button-${pawmentId}`);
       currDeleteButton.addEventListener('click', async (e) => {
-        const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
+        const apiPath = `/api/pawments/${pawmentId}/delete`;
         const res = await fetch(apiPath, {
           method: 'POST',
           body: JSON.stringify({
