@@ -29,16 +29,15 @@ block content
       div(class="content")
         pre(id='post-content')= post.content
       div(class="pawst-content-footer")
-        div(class="author")= userName
+        div(class="author")
+            a(href=`/users/${post.userId}` class='author-link-footer')= userName
         div(class="likes-stats")
           div(class="like-icon")
             span(class="material-icons like-btn") pets
           div(class="like-count")
             p(class="like-display")= catnipsCount
             //- send back like amount
-        div(class="pawments-stats")
-          div(class="pawment-icon")
-          div(class="pawment-count")
+
       div(id="pawments-container")
         if locals.authenticated
           div(class='new-pawment-box')

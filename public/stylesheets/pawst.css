@@ -38,12 +38,30 @@
     text-align: start;
 }
 
-.post-author {
+.post-author, .like-display {
     font-size: 1.1rem;
     text-align: start;
     text-decoration: none;
-    color: rgb(255, 138, 236);
+    color: rgba(255, 0, 0, 0.3);
     text-transform: capitalize;
+}
+
+.author-link-footer {
+    font-size: 1.3rem; 
+    text-decoration: none;
+    color: rgba(255, 0, 0, 0.3);
+    text-transform: capitalize;
+}
+
+
+
+.like-btn, .like-display {
+    font-size: 2rem; 
+    color: rgba(255, 0, 0, 0.3);
+}
+
+.like-display {
+    font-size: 1.3rem;
 }
 
 .date {
@@ -54,6 +72,7 @@
     display: flex;
     width: 85%;
     justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .author-date {
@@ -79,6 +98,9 @@
     text-decoration: underline;
 }
 
+.author:hover {
+    text-decoration: underline;
+}
 
 
 hr {
@@ -102,17 +124,36 @@ hr {
 .pawst-content-footer {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  width: 85%;
+  margin: 10px;
+  font-family: Arial, Helvetica, sans-serif;
   align-items: center;
+}
+
+.like-count {
+    display: flex;
+    align-items:center;
 }
 
 .pawst-content-footer .author {
   margin-right: 10px;
+  
 }
 
-.likes-stats,
-.pawments-stats {
+.author {
+    width: 50%;
+    text-align: center;
+}
+
+.likes-stats {
   display: flex;
-  align-items: center;
+  width: 50%;
+  justify-content: center;
+}
+
+.likes-stats:hover {
+    background-color: rgba(255, 0, 0, 0.4);
 }
 
 .like-icon,
@@ -120,13 +161,15 @@ hr {
   margin-right: 5px;
 }
 
+.like-display {
+margin: 0px;
+}
+
 .like-btn {
     color: rgba(255, 0, 0, 0.3);
 }
 
-.like-btn:hover {
-    color: rgba(255, 0, 0, 0.5);
-}
+
 
 .clicked {
     color: rgba(255, 0, 0, 0.8);

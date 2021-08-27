@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
 
-  const likeButton = document.querySelector('.like-btn');
+  const likeButton = document.querySelector('.likes-stats');
   const likeDisplay = document.querySelector('.like-display');
   likeButton.addEventListener('click', async (e) => {
     const apiPath = `/api${window.location.pathname}/catnips`
