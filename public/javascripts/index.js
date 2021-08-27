@@ -11,14 +11,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const res = await fetch(`${window.location.href}/pawments`, { // TODO: change to API once functioning
-        method: "post",
+        method: "POST",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
       });
 
 
       if (!res.ok) {
-        throw res;
+        throw 'Comment can\'t be empty.'
       };
 
       const {
@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     } catch (err) {
+      //TODO - change way of handling error
       console.log(err);
     }
   });

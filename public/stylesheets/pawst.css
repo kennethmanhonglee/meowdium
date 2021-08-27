@@ -99,6 +99,27 @@ hr {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.pawst-content-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pawst-content-footer .author {
+  margin-right: 10px;
+}
+
+.likes-stats,
+.pawments-stats {
+  display: flex;
+  align-items: center;
+}
+
+.like-icon,
+.pawment-icon {
+  margin-right: 5px;
+}
+
 .like-btn {
     color: rgba(255, 0, 0, 0.3);
 }
@@ -109,4 +130,51 @@ hr {
 
 .clicked {
     color: rgba(255, 0, 0, 0.8);
+}
+
+.new-pawment-box {
+  margin-bottom: 30px;
+}
+
+.new-pawment-box textarea {
+  resize: vertical;
+  min-width: 500px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.pawment {
+  padding: 0 0 15px;
+  border: 1px solid #CCCCCC;
+  border-width: 0 0 1px;
+  margin-bottom: 20px;
+}
+.pawment:last-of-type {
+  border: none;
+}
+.pawmenter-info,
+.pawment-content {
+  font-family: 'Didact Gothic', sans-serif;
+}
+.pawmenter-info {
+  color: #888888;
+  margin-bottom: 10px;
+}
+.commenter-name {
+  margin-bottom: 5px;
+}
+.pawment-date {
+  font-size: 0.85rem;
+}
+.pawment-content {
+  box-sizing: border-box;
+  min-height: 100px;
+  padding: 10px;
+  color: #333333;
+  margin-bottom: 5px;
+  border: 1px solid #D0D0D0;
+}
+.pawment-buttons {
+  display: flex;
+  flex-direction: row;
 }
