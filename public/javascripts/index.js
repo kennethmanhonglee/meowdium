@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pawmentsList = document.getElementById('pawments-list');
 
       const pawmentDiv = document.createElement('div');
-      pawmentDiv.setAttribute("class", `pawment pawment-${id}`);
+      pawmentDiv.setAttribute("class", `pawment pawment-${id} blinder`);
 
       const pawmenterInfoDiv = document.createElement('div');
       pawmenterInfoDiv.setAttribute('class', 'pawmenter-info');
@@ -125,7 +125,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         pawmentDiv.append(pawmentButtonsDiv);
 
         pawmentsList.prepend(pawmentDiv);
-
+        requestAnimationFrame(() => {
+          pawmentDiv.classList.remove("blinder")
+        })
 
 
       } catch (err) {
