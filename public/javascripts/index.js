@@ -11,14 +11,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const res = await fetch(`${window.location.href}/pawments`, { // TODO: change to API once functioning
-        method: "POST",
+        method: "post",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
       });
 
 
       if (!res.ok) {
-        throw 'Comment can\'t be empty.'
+        throw res;
       };
 
       const {
@@ -63,26 +63,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       pawmentButtonsDiv.append(pawmentEditButton, pawmentDeleteButton);
       pawmentDiv.append(pawmentButtonsDiv);
 
-      // TODO - change from innerHTML to textContent or something
-      //   pawmentDiv.innerHTML = `
-      //   <div class="pawmenter-info">
-      //     <div class="commenter-name">${userName}</div>
-      //     <div class="pawment-date">${createdAt}</div>
-      //     <input type='hidden' value=${id} id=${id}>
-      //   </div>
-      //   <div class="pawment-content">${content}</div>
-      //   <div class="pawment-buttons">
-      //     <form action="/pawments/${id}/edit" method="post">
-      //       <button type="submit">Edit</button>
-      //     </form>
-      //     <form action="/pawments/${id}/delete" method="post">
-      //       <button type="submit">Delete</button>
-      //     </form>
-      //   </div>
-      // `
-
-
-
       const hr = document.createElement('hr');
       hr.setAttribute('class', `hr-${id}`)
       pawmentsList.prepend(hr);
@@ -91,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     } catch (err) {
-      alert(err)
+      console.log(err);
     }
   });
 
@@ -124,7 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   // deleting pawments
   const pawmentsList = document.querySelector('#pawments-list');
   for (let ele of pawmentsList.childNodes) {
-    console.log(ele.childNodes);
     if (ele.childNodes.length > 3) { //not an hr
       // ele is a pawment div
       // ele.childNodes - div.pawmenter-info, div.pawment-content, div.pawment-button

@@ -23,7 +23,7 @@ const pawmentValidators = [
     .withMessage('Pawment can\'t be empty.')
 ];
 
-router.get('/new', csrfProtection, asyncHandler(async (req, res, next) => {
+router.get('/new', csrfProtection, asyncHandler(async (req, res) => {
   if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
@@ -162,15 +162,16 @@ router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandl
 
   if (validationErrors.isEmpty()) {
     await pawment.save();
-    const { id, createdAt } = pawment;
+    const { id, updatedAt } = pawment;
     return res.status(201).json({
       id,
       userId,
       content,
       userName,
-      updated: updatedAt.toDateString()
+      updatedAt: updatedAt.toDateString()
     })
   } else {
+    const errors = validationErrors.array().map((error) => error.msg);
     return res.status(406).json({
       emptyComment: true
     });
