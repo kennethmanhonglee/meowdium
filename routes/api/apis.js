@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
+const { check, validationResult } = require('express-validator');
 const { User, Pawst, Catnip, Pawment } = require('../../db/models');
 const { csrfProtection, asyncHandler } = require('../utils');
+
+const pawmentValidators = [
+    check('content')
+      .exists({ checkFalsy: true })
+      .withMessage('Pawment can\'t be empty.')
+  ];
 
 router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
     // TODO - verify that the user is logged in
@@ -59,5 +66,33 @@ router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
 
 }))
 
+router.post('/pawments/:id(\\d+)/edit', pawmentValidators, asyncHandler(async (req, res) => {
+    if (!res.locals.authenticated) {
+      return res.status(401).json('You need to be logged in to use this feature!');
+    }
+    const { content } = req.body
+    const pawmentId = parseInt(req.params.id, 10);
+    const pawment = await Pawment.findByPk(pawmentId);
+    // console.log('CONTENT!!!!!!', content);
+    if (res.locals.user.id !== pawment.userId) {
+      return res.status(404).json('Unauthorized User.')
+    }
+    const validationErrors = validationResult(req);
+    if (validationErrors.isEmpty()) {
+      await pawment.update({
+        content,
+        updatedAt: pawment.updatedAt
+      })
+      return res.json({
+        pawment,
+        newContent: content,
+        updatedAt: pawment.updatedAt
+      })
+    } else {
+        return res.status(406).json({
+            emptyComment: true
+          });
+    }
+}));
 
 module.exports = router;
