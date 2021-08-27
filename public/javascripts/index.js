@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         updatedAt } = await res.json();
 
       const pawmentsList = document.getElementById('pawments-list');
+      console.log(pawmentsList);
 
       const pawmentDiv = document.createElement('div');
       pawmentDiv.setAttribute("class", "pawment");
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       commenterNameDiv.textContent = userName;
       const pawmentDateDiv = document.createElement('div');
       pawmentDateDiv.setAttribute('class', 'pawment-date');
-      pawmentDateDiv.textContent = updatedAt.toDateString();
+      pawmentDateDiv.textContent = updatedAt;
       const hiddenIdInput = document.createElement('input');
       hiddenIdInput.setAttribute('value', id);
       hiddenIdInput.setAttribute('id', id);
