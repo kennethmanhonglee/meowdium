@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { User, Pawst, Catnip } = require('../../db/models');
+const { User, Pawst, Catnip, Pawment } = require('../../db/models');
 const { csrfProtection, asyncHandler } = require('../utils');
 
 router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
@@ -41,6 +41,23 @@ router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
     }
 }));
 
+router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
+    if (!res.locals.authenticated) {
+        return res.status(404).json('You are not logged in!');
+    }
+
+    const pawmentId = parseInt(req.params.id, 10);
+    console.log('this is thwe pawmentId', pawmentId);
+    const pawmentToDelete = await Pawment.findByPk(pawmentId);
+    console.log(pawmentToDelete);
+    if (res.locals.user.id === pawmentToDelete.userId) {
+        await pawmentToDelete.destroy();
+        return res.status(200).json({ pawmentId });
+    } else {
+        return res.status(404).json('You are not the user!');
+    }
+
+}))
 
 
 module.exports = router;

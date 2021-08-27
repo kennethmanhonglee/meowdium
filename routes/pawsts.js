@@ -23,7 +23,7 @@ const pawmentValidators = [
     .withMessage('Pawment can\'t be empty.')
 ];
 
-router.get('/new', csrfProtection, asyncHandler(async (req, res, next) => {
+router.get('/new', csrfProtection, asyncHandler(async (req, res) => {
   if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
@@ -69,8 +69,9 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
   const user = await User.findByPk(userId);
   const { userName, email } = user;
   const pawments = await Pawment.findAll({
-    where: {pawstId: postId},
+    where: { pawstId: postId },
     order: [['createdAt', 'DESC']],
+    include: User
   });
   const catnipsCount = await Catnip.count();
 
@@ -147,28 +148,30 @@ router.post('/:id(\\d+)/delete', asyncHandler(async (req, res) => {
 
 }));
 
-router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandler(async(req, res) => {
-  if( !res.locals.authenticated ) {
+router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandler(async (req, res) => {
+  if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
   const { content } = req.body;
   const postId = parseInt(req.params.id, 10);
-  const pawment = await Pawment.build( {content, userId: req.session.auth.userId, pawstId: postId} )
+  const pawment = await Pawment.build({ content, userId: req.session.auth.userId, pawstId: postId })
   const validationErrors = validationResult(req);
-  
+
   const user = await User.findByPk(req.session.auth.userId);
-  const { userName } = user;
+  const { userName, id: userId } = user;
 
   if (validationErrors.isEmpty()) {
     await pawment.save();
-    const { id, createdAt } = pawment;
+    const { id, updatedAt } = pawment;
     return res.status(201).json({
       id,
+      userId,
       content,
       userName,
-      createdAt: createdAt.toDateString()
+      updatedAt: updatedAt.toDateString()
     })
   } else {
+    const errors = validationErrors.array().map((error) => error.msg);
     return res.status(406).json({
       emptyComment: true
     });
@@ -176,18 +179,18 @@ router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandl
 }));
 
 router.post('/pawments/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(async (req, res) => {
-  if( !res.locals.authenticated ) {
+  if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
   const { content } = req.body
   const pawmentId = parseInt(req.params.id, 10);
   const pawment = await Pawment.findByPk(pawmentId);
 
-  if( res.locals.user.id !== pawment.userId ){
+  if (res.locals.user.id !== pawment.userId) {
     return res.status(404).redirect('/');
   }
-  const validationErrors = validationResult( req );
-  if( validationErrors.isEmpty() ){
+  const validationErrors = validationResult(req);
+  if (validationErrors.isEmpty()) {
     await pawment.update({
       content
     })
