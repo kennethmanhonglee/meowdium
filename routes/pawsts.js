@@ -178,32 +178,4 @@ router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandl
   }
 }));
 
-router.post('/pawments/:id(\\d+)/edit', csrfProtection, pawstValidators, asyncHandler(async (req, res) => {
-  if (!res.locals.authenticated) {
-    return res.redirect('/users/login');
-  }
-  const { content } = req.body
-  const pawmentId = parseInt(req.params.id, 10);
-  const pawment = await Pawment.findByPk(pawmentId);
-
-  if (res.locals.user.id !== pawment.userId) {
-    return res.status(404).redirect('/');
-  }
-  const validationErrors = validationResult(req);
-  if (validationErrors.isEmpty()) {
-    await pawment.update({
-      content
-    })
-    return res.redirect(`/pawsts/${pawment.pawstId}`);
-  } else {
-    const errors = validationErrors.array().map((error) => error.msg);
-    return res.render('pawst', {
-      post,
-      pawments,
-      errors,
-      csrfToken: req.csrfToken()
-    })
-  }
-}));
-
 module.exports = router;
