@@ -48,8 +48,8 @@ router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
 
     const pawmentId = parseInt(req.params.id, 10);
 
+    const pawmentToDelete = await Pawment.findByPk(pawmentId);
     if (res.locals.user.id === pawmentToDelete.userId) {
-        const pawmentToDelete = await Pawment.findByPk(pawmentId);
         await pawmentToDelete.destroy();
         return res.status(200).json(pawmentId);
     } else {

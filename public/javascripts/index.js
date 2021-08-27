@@ -96,7 +96,15 @@ document.addEventListener("DOMContentLoaded", async () => {
       currDeleteButton.addEventListener('click', async (e) => {
         e.preventDefault();
         // TODO - finish writing fetch request to delete route
-
+        const res = await fetch(apiPath, {
+          method: 'POST',
+          body: JSON.stringify({
+            _key: '_value'
+          }),
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
       })
     }
   }

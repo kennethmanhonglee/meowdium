@@ -71,6 +71,7 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
   const pawments = await Pawment.findAll({
     where: { pawstId: postId },
     order: [['createdAt', 'DESC']],
+    include: User
   });
   const catnipsCount = await Catnip.count();
 
