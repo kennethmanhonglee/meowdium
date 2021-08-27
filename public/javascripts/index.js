@@ -75,6 +75,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         editSubmitButton.addEventListener('click', async (e) => {
             const apiPath = `/api/pawments/${id}/edit`;
             const newContent = pawmentContentDiv.textContent
+            if (!newContent) return
+
             const res = await fetch(apiPath, {
               method: 'POST',
               body: JSON.stringify({content: newContent}),
@@ -168,8 +170,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       // lastchild - div.pawment-buttons
       // value - hidden input that holds pawmentId rendered from get /pawsts/:id
       const pawmentId = ele.childNodes[0].lastChild.id;
-      const currDeleteButton = document.querySelector(`.delete-button-${pawmentId}`);
-      currDeleteButton.addEventListener('click', async (e) => {
+      const pawmentDeleteButton = document.querySelector(`.delete-button-${pawmentId}`);
+      pawmentDeleteButton.addEventListener('click', async (e) => {
         const apiPath = `/api/pawments/${pawmentId}/delete`;
         const res = await fetch(apiPath, {
           method: 'POST',
@@ -185,48 +187,52 @@ document.addEventListener("DOMContentLoaded", async () => {
         const pawmentDivToDelete = document.querySelector(`.pawment-${pawmentId}`);
         pawmentDivToDelete.remove();
       })
+
+      const pawmentEditButton = document.querySelector(`.edit-button-${pawmentId}`)
+      pawmentEditButton.addEventListener('click', async (e) => {
+        const pawmentContentDiv = ele.childNodes[1];
+        let content = pawmentContentDiv.textContent
+        const editSubmitButton = document.querySelector(`.edit-submit-button-${pawmentId}`);
+        const editCancelButton = document.querySelector(`.edit-cancel-button-${pawmentId}`);
+        editSubmitButton.removeAttribute('hidden')
+        editCancelButton.removeAttribute('hidden')
+        pawmentEditButton.setAttribute('hidden', 'true')
+        pawmentDeleteButton.setAttribute('hidden', 'true')
+        pawmentContentDiv.setAttribute('contentEditable', 'true');
+        editSubmitButton.addEventListener('click', async (e) => {
+          const apiPath = `/api/pawments/${pawmentId}/edit`;
+          const newContent = pawmentContentDiv.textContent
+          if (!newContent) return
+
+          const res = await fetch(apiPath, {
+            method: 'POST',
+            body: JSON.stringify({ content: newContent }),
+            headers: { 'content-type': 'application/json' }
+          })
+
+          // const { newContent } = await res.json();
+
+          pawmentContentDiv.textContent = newContent;
+          content = newContent;
+          pawmentContentDiv.setAttribute('contentEditable', 'false');
+          pawmentDeleteButton.removeAttribute('hidden');
+          pawmentEditButton.removeAttribute('hidden');
+          editSubmitButton.setAttribute('hidden', 'true');
+          editCancelButton.setAttribute('hidden', 'true');
+        })
+
+        editCancelButton.addEventListener('click', (e) => {
+          pawmentContentDiv.textContent = content;
+          pawmentContentDiv.setAttribute('contentEditable', 'false');
+          pawmentDeleteButton.removeAttribute('hidden');
+          pawmentEditButton.removeAttribute('hidden');
+          editSubmitButton.setAttribute('hidden', 'true');
+          editCancelButton.setAttribute('hidden', 'true');
+        })
+
+      })
     }
   }
 
   // TODO: EDITING COMMENTS RENDERED BY THE PUG FILE. TO BE EDITED.
-  // pawmentEditButton.addEventListener('click', async (e) => {
-
-  //   pawmentContentDiv.setAttribute('contentEditable', 'true');
-  //   pawmentEditButton.setAttribute('hidden', 'true');
-  //   pawmentDeleteButton.setAttribute('hidden', 'true');
-
-  //   const editSubmitButton = document.createElement('button');
-  //   editSubmitButton.textContent = 'Submit'
-  //   const editCancelButton = document.createElement('button');
-  //   editCancelButton.textContent = 'Cancel'
-  //   pawmentButtonsDiv.append(editCancelButton, editSubmitButton);
-  //   editSubmitButton.addEventListener('click', async (e) => {
-  //     const apiPath = `/api/pawments/${id}/edit`;
-  //     const newContent = pawmentContentDiv.textContent
-  //     const res = await fetch(apiPath, {
-  //       method: 'POST',
-  //       body: JSON.stringify({ content: newContent }),
-  //       headers: { 'content-type': 'application/json' }
-  //     })
-  //     // const { newContent } = await res.json();
-
-  //     pawmentContentDiv.textContent = newContent;
-  //     content = newContent;
-  //     pawmentContentDiv.setAttribute('contentEditable', 'false');
-  //     pawmentDeleteButton.removeAttribute('hidden');
-  //     pawmentEditButton.removeAttribute('hidden');
-  //     editSubmitButton.setAttribute('hidden', 'true');
-  //     editCancelButton.setAttribute('hidden', 'true');
-  //   })
-
-  //   editCancelButton.addEventListener('click', (e) => {
-  //     pawmentContentDiv.textContent = content;
-  //     pawmentContentDiv.setAttribute('contentEditable', 'false');
-  //     pawmentDeleteButton.removeAttribute('hidden');
-  //     pawmentEditButton.removeAttribute('hidden');
-  //     editSubmitButton.setAttribute('hidden', 'true');
-  //     editCancelButton.setAttribute('hidden', 'true');
-  //   })
-
-  // })
 });

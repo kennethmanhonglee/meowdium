@@ -66,14 +66,14 @@ router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
 
 }))
 
-router.post('/pawments/:id(\\d+)/edit', csrfProtection, pawmentValidators, asyncHandler(async (req, res) => {
+router.post('/pawments/:id(\\d+)/edit', pawmentValidators, asyncHandler(async (req, res) => {
     if (!res.locals.authenticated) {
       return res.status(401).json('You need to be logged in to use this feature!');
     }
     const { content } = req.body
     const pawmentId = parseInt(req.params.id, 10);
     const pawment = await Pawment.findByPk(pawmentId);
-
+    // console.log('CONTENT!!!!!!', content);
     if (res.locals.user.id !== pawment.userId) {
       return res.status(404).json('Unauthorized User.')
     }
