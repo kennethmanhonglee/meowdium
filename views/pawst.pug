@@ -4,7 +4,7 @@ include utils.pug
 block head
     link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
     link(rel="stylesheet", href="/stylesheets/pawst.css")
-  
+
 
 block content
   div(class='container')
@@ -48,7 +48,7 @@ block content
               div(class='')
                 button(id='comment-submit' type='submit' class='btn btn-primary') Submit
         div(id='pawments-list')
-          
+
           each pawment in pawments
             div(class="pawment")
               div(class="pawmenter-info")
@@ -61,5 +61,4 @@ block content
                     button(type="submit") Edit
                   form(action=`/pawments/${pawment.id}/delete` method="post")
                     button(type="submit") Delete
-            hr
   script(type='module' src="/javascripts/index.js")
