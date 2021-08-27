@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const currDeleteButton = document.querySelector(`form[action='/pawments/${pawmentId}/delete'] button`)
       currDeleteButton.addEventListener('click', async (e) => {
         e.preventDefault();
-        // TODO - finish writing fetch request to delete route
+
         const res = await fetch(apiPath, {
           method: 'POST',
           body: JSON.stringify({
@@ -104,7 +104,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           headers: {
             'content-type': 'application/json'
           }
-        })
+        });
+        // dynamically remove comment
+        
       })
     }
   }
