@@ -25,28 +25,67 @@ document.addEventListener("DOMContentLoaded", async () => {
         id,
         content,
         userName,
-        createdAt } = await res.json();
+        updatedAt } = await res.json();
 
       const pawmentsList = document.getElementById('pawments-list');
+
       const pawmentDiv = document.createElement('div');
       pawmentDiv.setAttribute("class", "pawment");
-      // TODO - change from innerHTML to textContent or something
-      pawmentDiv.innerHTML = `
-      <div class="pawmenter-info">
-        <div class="commenter-name">${userName}</div>
-        <div class="pawment-date">${createdAt}</div>
-      </div>
-      <div class="pawment-content">${content}</div>
-      <div class="pawment-buttons">
-        <form action="/pawments/${id}/edit" method="post">
-          <button type="submit">Edit</button>
-        </form>
-        <form action="/pawments/${id}/delete" method="post">
-          <button type="submit">Delete</button>
-        </form>
-      </div>
-    `
 
+      const pawmenterInfoDiv = document.createElement('div');
+      pawmenterInfoDiv.setAttribute('class', 'pawmenter-info');
+
+      const commenterNameDiv = document.createElement('div');
+      commenterNameDiv.setAttribute('class', 'commenter-name');
+      commenterNameDiv.textContent = userName;
+      const pawmentDateDiv = document.createElement('div');
+      pawmentDateDiv.setAttribute('class', 'pawment-date');
+      pawmentDateDiv.textContent = updatedAt.toDateString();
+      const hiddenIdInput = document.createElement('input');
+      hiddenIdInput.setAttribute('value', id);
+      hiddenIdInput.setAttribute('id', id);
+      pawmenterInfoDiv.append(commenterNameDiv, pawmentDateDiv, hiddenIdInput);
+      pawmentDiv.append(pawmenterInfoDiv);
+
+      const pawmentContentDiv = document.createElement('div');
+      pawmentContentDiv.setAttribute('class', 'pawment-content');
+      pawmentContentDiv.textContent = content;
+      pawmentDiv.append(pawmentContentDiv);
+
+      const pawmentButtonsDiv = document.createElement('div');
+      pawmentButtonsDiv.setAttribute('class', 'pawment-buttons');
+      const pawmentEditButton = document.createElement('button');
+      pawmentEditButton.setAttribute('value', id);
+      pawmentEditButton.textContent = 'Edit';
+      const pawmentDeleteButton = document.createElement('button');
+      pawmentDeleteButton.setAttribute('value', id);
+      pawmentDeleteButton.textContent = 'Delete';
+      pawmentButtonsDiv.append(pawmentEditButton, pawmentDeleteButton);
+      pawmentDiv.append(pawmentButtonsDiv);
+
+      // TODO - change from innerHTML to textContent or something
+      //   pawmentDiv.innerHTML = `
+      //   <div class="pawmenter-info">
+      //     <div class="commenter-name">${userName}</div>
+      //     <div class="pawment-date">${createdAt}</div>
+      //     <input type='hidden' value=${id} id=${id}>
+      //   </div>
+      //   <div class="pawment-content">${content}</div>
+      //   <div class="pawment-buttons">
+      //     <form action="/pawments/${id}/edit" method="post">
+      //       <button type="submit">Edit</button>
+      //     </form>
+      //     <form action="/pawments/${id}/delete" method="post">
+      //       <button type="submit">Delete</button>
+      //     </form>
+      //   </div>
+      // `
+
+
+
+      const hr = document.createElement('hr');
+      hr.setAttribute('class', `hr-${id}`)
+      pawmentsList.prepend(hr);
       pawmentsList.prepend(pawmentDiv);
 
 
@@ -85,14 +124,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   // deleting pawments
   const pawmentsList = document.querySelector('#pawments-list');
   for (let ele of pawmentsList.childNodes) {
-    if (ele.childNodes.length > 2) { //not an hr
+    console.log(ele.childNodes);
+    if (ele.childNodes.length > 3) { //not an hr
       // ele is a pawment div
       // ele.childNodes - div.pawmenter-info, div.pawment-content, div.pawment-button
       // lastchild - div.pawment-buttons
       // value - hidden input that holds pawmentId rendered from get /pawsts/:id
       const pawmentId = ele.childNodes[0].lastChild.value;
       const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
-      const currDeleteButton = document.querySelector(`form[action='/pawments/${pawmentId}/delete'] button`)
+      const currDeleteButton = document.querySelector(`.delete-button-${pawmentId}`);
       currDeleteButton.addEventListener('click', async (e) => {
         e.preventDefault();
 
@@ -106,7 +146,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         });
         // dynamically remove comment
-        
+        const pawmentDivToDelete = document.querySelector(`.pawment-${pawmentId}`);
+        const hrToDelete = document.querySelector(`.hr-${pawmentId}`);
+        pawmentDivToDelete.remove();
+        hrToDelete.remove();
       })
     }
   }

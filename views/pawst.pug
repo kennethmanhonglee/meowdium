@@ -48,9 +48,8 @@ block content
               div(class='')
                 button(id='comment-submit' type='submit' class='btn btn-primary') Submit
         div(id='pawments-list')
-          
           each pawment in pawments
-            div(class="pawment")
+            div(class=`pawment-${pawment.id}`)
               div(class="pawmenter-info")
                 div(class="commenter-name")= pawment.User.userName
                 div(class="pawment-date")= pawment.updatedAt.toDateString()
@@ -58,9 +57,7 @@ block content
               div(class="pawment-content")= pawment.content
               if locals.authenticated && locals.user.id === pawment.userId
                 div(class="pawment-buttons")
-                  form(action=`/pawments/${pawment.id}/edit` method="post")
-                    button(type="submit") Edit
-                  form(action=`/pawments/${pawment.id}/delete` method="post")
-                    button(type="submit") Delete
-            hr
+                  button(class=`edit-button-${pawment.id}`) Edit
+                  button(class=`delete-button-${pawment.id}`) Delete
+              hr(class=`hr-${pawment.id}`)
   script(type='module' src="/javascripts/index.js")

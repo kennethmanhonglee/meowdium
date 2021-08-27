@@ -168,7 +168,7 @@ router.post('/:id(\\d+)/pawments', csrfProtection, pawmentValidators, asyncHandl
       userId,
       content,
       userName,
-      createdAt: createdAt.toDateString()
+      updated: updatedAt.toDateString()
     })
   } else {
     return res.status(406).json({
