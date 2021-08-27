@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const hiddenIdInput = document.createElement('input');
       hiddenIdInput.setAttribute('value', id);
       hiddenIdInput.setAttribute('id', id);
+      hiddenIdInput.setAttribute('hidden', true);
       pawmenterInfoDiv.append(commenterNameDiv, pawmentDateDiv, hiddenIdInput);
       pawmentDiv.append(pawmenterInfoDiv);
 
@@ -83,6 +84,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pawmentDeleteButton = document.createElement('button');
       pawmentDeleteButton.setAttribute('value', id);
       pawmentDeleteButton.textContent = 'Delete';
+      const apiPath = `${window.location.origin}/api/pawments/${id}/delete`;
       pawmentDeleteButton.addEventListener('click', async (e) => {
         e.preventDefault();
 
@@ -148,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // deleting pawments
   const pawmentsList = document.querySelector('#pawments-list');
   for (let ele of pawmentsList.childNodes) {
-    console.log(ele.childNodes); //DEBUG!!!!
+    console.log(ele.childNodes.lastChild); //DEBUG!!!!
     if (ele.childNodes.length > 3) { //not an hr
       // ele is a pawment div
       // ele.childNodes - div.pawmenter-info, div.pawment-content, div.pawment-button
