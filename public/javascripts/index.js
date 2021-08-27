@@ -1,4 +1,26 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const dynamicDeleteComment = async (e) => {
+    e.preventDefault();
+
+    const res = await fetch(apiPath, {
+      method: 'POST',
+      body: JSON.stringify({
+        _key: '_value'
+      }),
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+    const { pawmentId } = await res.json();
+    const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
+
+    // dynamically remove comment
+    const pawmentDivToDelete = document.querySelector(`.pawment-${pawmentId}`);
+    const hrToDelete = document.querySelector(`.hr-${pawmentId}`);
+    pawmentDivToDelete.remove();
+    hrToDelete.remove();
+  }
+
   const userCommentForm = document.querySelector("#new-pawment-form");
   const commentTextArea = document.querySelector('#content')
   userCommentForm.addEventListener("submit", async (e) => {
@@ -61,6 +83,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       const pawmentDeleteButton = document.createElement('button');
       pawmentDeleteButton.setAttribute('value', id);
       pawmentDeleteButton.textContent = 'Delete';
+      pawmentDeleteButton.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const res = await fetch(apiPath, {
+          method: 'POST',
+          body: JSON.stringify({
+            _key: '_value'
+          }),
+          headers: {
+            'content-type': 'application/json'
+          }
+        });
+        const { pawmentId } = await res.json();
+        const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
+
+        // dynamically remove comment
+        const pawmentDivToDelete = document.querySelector(`.pawment-${pawmentId}`);
+        const hrToDelete = document.querySelector(`.hr-${pawmentId}`);
+        pawmentDivToDelete.remove();
+        hrToDelete.remove();
+      });
       pawmentButtonsDiv.append(pawmentEditButton, pawmentDeleteButton);
       pawmentDiv.append(pawmentButtonsDiv);
 
@@ -105,17 +148,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   // deleting pawments
   const pawmentsList = document.querySelector('#pawments-list');
   for (let ele of pawmentsList.childNodes) {
+    console.log(ele.childNodes); //DEBUG!!!!
     if (ele.childNodes.length > 3) { //not an hr
       // ele is a pawment div
       // ele.childNodes - div.pawmenter-info, div.pawment-content, div.pawment-button
       // lastchild - div.pawment-buttons
       // value - hidden input that holds pawmentId rendered from get /pawsts/:id
       const pawmentId = ele.childNodes[0].lastChild.value;
-      const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
       const currDeleteButton = document.querySelector(`.delete-button-${pawmentId}`);
+      console.log(currDeleteButton);
       currDeleteButton.addEventListener('click', async (e) => {
         e.preventDefault();
 
+        const apiPath = `${window.location.origin}/api/pawments/${pawmentId}/delete`;
         const res = await fetch(apiPath, {
           method: 'POST',
           body: JSON.stringify({
@@ -125,6 +170,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             'content-type': 'application/json'
           }
         });
+        const { pawmentId } = await res.json();
+
         // dynamically remove comment
         const pawmentDivToDelete = document.querySelector(`.pawment-${pawmentId}`);
         const hrToDelete = document.querySelector(`.hr-${pawmentId}`);

@@ -52,7 +52,7 @@ router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
     console.log(pawmentToDelete);
     if (res.locals.user.id === pawmentToDelete.userId) {
         await pawmentToDelete.destroy();
-        return res.status(200).json(pawmentId);
+        return res.status(200).json({ pawmentId });
     } else {
         return res.status(404).json('You are not the user!');
     }
