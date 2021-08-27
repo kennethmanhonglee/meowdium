@@ -148,6 +148,11 @@ hr {
   border: 1px solid #CCCCCC;
   border-width: 0 0 1px;
   margin-bottom: 20px;
+  opacity: 100%;
+  transition: opacity .75s;
+}
+.pawment.blinder {
+  opacity: 0%;
 }
 .pawment:last-of-type {
   border: none;
