@@ -6,7 +6,7 @@ block head
 block content
   div.content
     div.index-top.top-section
-      h2 Meowdium
+      h2
     div(class='feed')
       each post in posts
         div(class='post')
@@ -18,3 +18,5 @@ block content
             a(class="author-link" href=`/users/${post.userId}`)
               span(class='post-user')= post.User.userName
             span(class='post-time')= post.updatedAt.toDateString()
+
+  script(type="module" src="/javascripts/index.js") 

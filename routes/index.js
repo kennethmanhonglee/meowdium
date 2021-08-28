@@ -7,13 +7,11 @@ const { User, Pawst } = require("../db/models");
 
 
 /* GET home page. */
-router.get('/', asyncHandler (async (req, res, next) => {
-  // const userId = parseInt(req.params.id, 10);
-  // const user = await User.findByPk(userId);
-  // const { userName, email } = user;
+router.get('/', asyncHandler(async (req, res, next) => {
   const posts = await Pawst.findAll({
     order: [['createdAt', 'DESC']],
-    include: User
+    include: [User],
+    limit: 15
   });
 
   return res.render("index", {
