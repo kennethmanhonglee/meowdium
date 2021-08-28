@@ -23,3 +23,11 @@
   flex-direction: column;
   align-items: center;
 }
+
+body {
+  background-image: url('../images/cat-4475583_640.png');
+  background-repeat: no-repeat;
+  background-position: 650px 800px;
+  background-size: 400px;
+}
+
