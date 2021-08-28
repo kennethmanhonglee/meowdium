@@ -73,7 +73,11 @@ router.get('/:id(\\d+)', csrfProtection, asyncHandler(async (req, res, next) => 
     order: [['createdAt', 'DESC']],
     include: User
   });
-  const catnipsCount = await Catnip.count();
+  const catnipsCount = await Catnip.count({
+    where: {
+      pawstId: postId
+    }
+  });
 
   return res.render('pawst', {
     title: post.title,
