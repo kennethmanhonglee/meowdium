@@ -3,6 +3,7 @@
 body {
   font-family: 'PT Serif', Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 21px;
+  color: #5F5F5F;
 }
 
 h1 {
@@ -11,6 +12,10 @@ h1 {
 
 h2 {
   font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
 }
 
 .btn {
@@ -74,6 +79,7 @@ form .btn.btn-primary:hover {
 .nav-bar .btn.btn-login {
   background-color: #ffd7dc;
   font-size: 1rem;
+  color: #5F5F5F;
 }
 
 
