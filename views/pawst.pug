@@ -22,9 +22,9 @@ block content
           if (locals.user && locals.user.id === post.userId )
             div(class='function-btns')
               form(action=`/pawsts/${post.id}/edit` method="get")
-                button(type="submit") Edit
+                button(type="submit" class="btn btn-edit") Edit
               form(action=`/pawsts/${post.id}/delete` method="post")
-                button(type="submit") Delete
+                button(type="submit" class="btn btn-delete") Delete
       hr
       div(class="content")
         pre(id='post-content')= post.content
@@ -59,21 +59,21 @@ block content
               div(class="pawment-content")= pawment.content
               if locals.authenticated && locals.user.id === pawment.userId
                 div(class="pawment-buttons")
-                  button(class=`edit-button-${pawment.id}`) Edit
-                  button(class=`delete-button-${pawment.id}`) Delete
-                  button(class=`edit-cancel-button-${pawment.id}` hidden) Cancel
-                  button(class=`edit-submit-button-${pawment.id}` hidden) Submit
-block footer 
+                  button(class=`edit-button-${pawment.id} btn btn-edit`) Edit
+                  button(class=`delete-button-${pawment.id} btn btn-delete`) Delete
+                  button(class=`edit-cancel-button-${pawment.id} btn btn-edit-cancel` hidden) Cancel
+                  button(class=`edit-submit-button-${pawment.id} btn btn-edit-submit` hidden) Submit
+block footer
   div(class='footer-bar')
     div(class='github-links')
-      image(id="github-icon" src="../images/github-mark.png", alt="")        
+      image(id="github-icon" src="../images/github-mark.png", alt="")
       div(class='al-div names')
         a(target="_blank" href="https://github.com/AlwynGrant") Alwyn
-      div(class='kenneth-div names')        
+      div(class='kenneth-div names')
         a(target="_blank" href="https://github.com/kennethmanhonglee") Kenneth
-      div(class='kris-div names')        
+      div(class='kris-div names')
         a(target="_blank" href="https://github.com/kristopher-castillo") Kris
-      div(class='michael-div names')        
+      div(class='michael-div names')
         a(target="_blank" href="https://github.com/MCE-Design") Michael
 
   script(type='module' src="/javascripts/index.js")
