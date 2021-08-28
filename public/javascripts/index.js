@@ -1,113 +1,115 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const userCommentForm = document.querySelector("#new-pawment-form");
   const commentTextArea = document.querySelector('#content')
-  userCommentForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(userCommentForm);
-    const content = formData.get('content');
-    const _csrf = formData.get('_csrf'); // TODO: test var naming
-    const body = { content, _csrf };
-    commentTextArea.value = '';
+  if (userCommentForm) {
 
-    try {
-      const res = await fetch(`${window.location.href}/pawments`, { // TODO: change to API once functioning
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: { "Content-Type": "application/json" },
-      });
+    userCommentForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(userCommentForm);
+      const content = formData.get('content');
+      const _csrf = formData.get('_csrf'); // TODO: test var naming
+      const body = { content, _csrf };
+      commentTextArea.value = '';
+
+      try {
+        const res = await fetch(`${window.location.href}/pawments`, { // TODO: change to API once functioning
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: { "Content-Type": "application/json" },
+        });
 
 
-      if (!res.ok) {
-        throw 'Comment can\'t be empty.'
-      };
+        if (!res.ok) {
+          throw 'Comment can\'t be empty.'
+        };
 
-      let {
-        id,
-        userId,
-        content,
-        userName,
-        updatedAt } = await res.json();
+        let {
+          id,
+          userId,
+          content,
+          userName,
+          updatedAt } = await res.json();
 
-      const pawmentsList = document.getElementById('pawments-list');
+        const pawmentsList = document.getElementById('pawments-list');
 
-      const pawmentDiv = document.createElement('div');
-      pawmentDiv.setAttribute("class", `pawment pawment-${id} blinder`);
+        const pawmentDiv = document.createElement('div');
+        pawmentDiv.setAttribute("class", `pawment pawment-${id} blinder`);
 
-      const pawmenterInfoDiv = document.createElement('div');
-      pawmenterInfoDiv.setAttribute('class', 'pawmenter-info');
+        const pawmenterInfoDiv = document.createElement('div');
+        pawmenterInfoDiv.setAttribute('class', 'pawmenter-info');
 
-      const commenterNameDiv = document.createElement('div');
-      commenterNameDiv.setAttribute('class', 'commenter-name');
-      const commenterNameLink = document.createElement('a')
-      commenterNameLink.setAttribute("href", `/users/${userId}`);
-      commenterNameLink.setAttribute('class', 'commenter-name-link')
-      commenterNameLink.textContent = userName;
-      commenterNameDiv.appendChild(commenterNameLink)
-      const pawmentDateDiv = document.createElement('div');
-      pawmentDateDiv.setAttribute('class', 'pawment-date');
-      pawmentDateDiv.textContent = updatedAt;
-      const hiddenIdInput = document.createElement('input');
-      hiddenIdInput.setAttribute('value', id);
-      hiddenIdInput.setAttribute('id', id);
-      hiddenIdInput.setAttribute('hidden', true);
-      pawmenterInfoDiv.append(commenterNameDiv, pawmentDateDiv, hiddenIdInput);
-      pawmentDiv.append(pawmenterInfoDiv);
+        const commenterNameDiv = document.createElement('div');
+        commenterNameDiv.setAttribute('class', 'commenter-name');
+        const commenterNameLink = document.createElement('a')
+        commenterNameLink.setAttribute("href", `/users/${userId}`);
+        commenterNameLink.setAttribute('class', 'commenter-name-link')
+        commenterNameLink.textContent = userName;
+        commenterNameDiv.appendChild(commenterNameLink)
+        const pawmentDateDiv = document.createElement('div');
+        pawmentDateDiv.setAttribute('class', 'pawment-date');
+        pawmentDateDiv.textContent = updatedAt;
+        const hiddenIdInput = document.createElement('input');
+        hiddenIdInput.setAttribute('value', id);
+        hiddenIdInput.setAttribute('id', id);
+        hiddenIdInput.setAttribute('hidden', true);
+        pawmenterInfoDiv.append(commenterNameDiv, pawmentDateDiv, hiddenIdInput);
+        pawmentDiv.append(pawmenterInfoDiv);
 
-      const pawmentContentDiv = document.createElement('div');
-      pawmentContentDiv.setAttribute('class', 'pawment-content');
-      pawmentContentDiv.textContent = content;
-      pawmentDiv.append(pawmentContentDiv);
+        const pawmentContentDiv = document.createElement('div');
+        pawmentContentDiv.setAttribute('class', 'pawment-content');
+        pawmentContentDiv.textContent = content;
+        pawmentDiv.append(pawmentContentDiv);
 
-      const pawmentButtonsDiv = document.createElement('div');
-      pawmentButtonsDiv.setAttribute('class', 'pawment-buttons');
-      const pawmentEditButton = document.createElement('button');
-      pawmentEditButton.setAttribute('value', id);
-      pawmentEditButton.textContent = 'Edit';
-      const pawmentDeleteButton = document.createElement('button');
-      pawmentDeleteButton.setAttribute('value', id);
-      pawmentDeleteButton.textContent = 'Delete';
-      pawmentEditButton.addEventListener('click', async (e) => {
+        const pawmentButtonsDiv = document.createElement('div');
+        pawmentButtonsDiv.setAttribute('class', 'pawment-buttons');
+        const pawmentEditButton = document.createElement('button');
+        pawmentEditButton.setAttribute('value', id);
+        pawmentEditButton.textContent = 'Edit';
+        const pawmentDeleteButton = document.createElement('button');
+        pawmentDeleteButton.setAttribute('value', id);
+        pawmentDeleteButton.textContent = 'Delete';
+        pawmentEditButton.addEventListener('click', async (e) => {
 
-        pawmentContentDiv.setAttribute('contentEditable', 'true');
-        pawmentEditButton.setAttribute('hidden', 'true');
-        pawmentDeleteButton.setAttribute('hidden', 'true');
+          pawmentContentDiv.setAttribute('contentEditable', 'true');
+          pawmentEditButton.setAttribute('hidden', 'true');
+          pawmentDeleteButton.setAttribute('hidden', 'true');
 
-        const editSubmitButton = document.createElement('button');
-        editSubmitButton.textContent = 'Submit'
-        const editCancelButton = document.createElement('button');
-        editCancelButton.textContent = 'Cancel'
-        pawmentButtonsDiv.append(editCancelButton, editSubmitButton);
-        editSubmitButton.addEventListener('click', async (e) => {
+          const editSubmitButton = document.createElement('button');
+          editSubmitButton.textContent = 'Submit'
+          const editCancelButton = document.createElement('button');
+          editCancelButton.textContent = 'Cancel'
+          pawmentButtonsDiv.append(editCancelButton, editSubmitButton);
+          editSubmitButton.addEventListener('click', async (e) => {
             const apiPath = `/api/pawments/${id}/edit`;
             const newContent = pawmentContentDiv.textContent
             if (!newContent) return
 
             const res = await fetch(apiPath, {
               method: 'POST',
-              body: JSON.stringify({content: newContent}),
-              headers: { 'content-type': 'application/json'}
+              body: JSON.stringify({ content: newContent }),
+              headers: { 'content-type': 'application/json' }
             })
-          // const { newContent } = await res.json();
+            // const { newContent } = await res.json();
 
-          pawmentContentDiv.textContent = newContent;
-          content = newContent;
-          pawmentContentDiv.setAttribute('contentEditable', 'false');
-          pawmentDeleteButton.removeAttribute('hidden');
-          pawmentEditButton.removeAttribute('hidden');
-          editSubmitButton.setAttribute('hidden', 'true');
-          editCancelButton.setAttribute('hidden', 'true');
+            pawmentContentDiv.textContent = newContent;
+            content = newContent;
+            pawmentContentDiv.setAttribute('contentEditable', 'false');
+            pawmentDeleteButton.removeAttribute('hidden');
+            pawmentEditButton.removeAttribute('hidden');
+            editSubmitButton.setAttribute('hidden', 'true');
+            editCancelButton.setAttribute('hidden', 'true');
+          })
+
+          editCancelButton.addEventListener('click', (e) => {
+            pawmentContentDiv.textContent = content;
+            pawmentContentDiv.setAttribute('contentEditable', 'false');
+            pawmentDeleteButton.removeAttribute('hidden');
+            pawmentEditButton.removeAttribute('hidden');
+            editSubmitButton.setAttribute('hidden', 'true');
+            editCancelButton.setAttribute('hidden', 'true');
+          })
+
         })
-
-        editCancelButton.addEventListener('click', (e) => {
-          pawmentContentDiv.textContent = content;
-          pawmentContentDiv.setAttribute('contentEditable', 'false');
-          pawmentDeleteButton.removeAttribute('hidden');
-          pawmentEditButton.removeAttribute('hidden');
-          editSubmitButton.setAttribute('hidden', 'true');
-          editCancelButton.setAttribute('hidden', 'true');
-        })
-
-      })
 
         pawmentDeleteButton.addEventListener('click', async (e) => {
           const apiPath = `/api/pawments/${id}/delete`;
@@ -140,6 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log(err);
       }
     });
+  }
 
 
   const likeButton = document.querySelector('.likes-stats');
