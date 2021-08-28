@@ -56,6 +56,6 @@ const getRandomInt = (max) => {
 }
 document.addEventListener('DOMContentLoaded', (e) => {
     const header = document.querySelector('h2');
-    console.log(header);
+    header.textContent = catPuns[getRandomInt(catPuns.length)];
 
 })
