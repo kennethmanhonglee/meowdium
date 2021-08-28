@@ -50,6 +50,7 @@ hr {
     height: 1px;
     background-color: rgba(255, 0, 0, 0.15);
     border: none;
+    width: 85%;
 }
 
 .author-link-footer {
@@ -108,9 +109,6 @@ hr {
 }
 
 
-hr {
-    width: 85%
-}
 
 .content {
     width: 85%;
@@ -147,7 +145,7 @@ hr {
 }
 
 #pawments-container {
-    width: 65%;
+    width: 50%;
 }
 
 .form-group, h3 {
@@ -232,6 +230,10 @@ margin: 0px;
   color: #888888;
   margin-bottom: 10px;
 }
+
+.commenter-name {
+text-align: left;
+}
 .commenter-name-link {
     font-size: 1.1rem;
     margin-bottom: 5px;
@@ -246,6 +248,7 @@ margin: 0px;
 
 .pawment-date {
   font-size: 0.85rem;
+  text-align: left;
 }
 .pawment-content {
   box-sizing: border-box;
@@ -256,11 +259,9 @@ margin: 0px;
   background-color:rgba(255, 215, 220, .25);
   border-radius: 8px; 
   transition: background-color .3s;
+  text-align: left;
 }
 
-.pawment {
-    width: 65%;
-}
 
 .pawment-content:hover {
   background-color: rgba(255, 215, 220, .5);
@@ -268,6 +269,10 @@ margin: 0px;
 .pawment-buttons {
   display: flex;
   flex-direction: row;
+}
+
+#pawments-list > div {
+    text-align: center;
 }
 
 button {
