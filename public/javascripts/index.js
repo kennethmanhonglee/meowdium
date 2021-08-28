@@ -144,31 +144,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  if (userCommentForm) {
+    const likeButton = document.querySelector('.likes-stats');
+    const likeDisplay = document.querySelector('.like-display');
 
-  const likeButton = document.querySelector('.likes-stats');
-  const likeDisplay = document.querySelector('.like-display');
-  likeButton.addEventListener('click', async (e) => {
-    const apiPath = `/api${window.location.pathname}/catnips`
-    const res = await fetch(apiPath, {
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        like: 'leelooo'
-      }),
-      method: 'POST'
-    })
+    likeButton.addEventListener('click', async (e) => {
+      const apiPath = `/api${window.location.pathname}/catnips`
+      const res = await fetch(apiPath, {
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          like: 'leelooo'
+        }),
+        method: 'POST'
+      })
 
-    const { deleted, catnipsCount } = await res.json();
+      const { deleted, catnipsCount } = await res.json();
 
-    if (deleted) {
-      // show unlike animation
-      likeDisplay.textContent = catnipsCount;
-      likeButton.classList.remove('clicked');
-    } else {
-      // show like animation
-      likeDisplay.textContent = catnipsCount;
-      likeButton.classList.add('clicked');
-    }
-  });
+      if (deleted) {
+        // show unlike animation
+        likeDisplay.textContent = catnipsCount;
+        likeButton.classList.remove('clicked');
+      } else {
+        // show like animation
+        likeDisplay.textContent = catnipsCount;
+        likeButton.classList.add('clicked');
+      }
+    });
+  }
 
 
   // deleting pawments
