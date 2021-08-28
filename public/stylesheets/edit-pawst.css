@@ -7,10 +7,28 @@ input.form-control {
   margin-bottom: 10px;
 }
 
+#title {
+    font-size: larger;
+    border: none;
+}
+
+#subtitle {
+    font-size: larger;
+    border: none;
+}
+
 #content {
-  box-sizing: border-box;
-  padding: 10px;
-  resize: vertical;
-  min-height: 300px;
-  min-width: 500px;
+    box-sizing: border-box;
+    padding: 10px;
+    resize: vertical;
+    min-height: 300px;
+    min-width: 500px;
+    outline: none;
+    border: none;
+    font-size: large;
+}
+
+
+.edit-pawst-submit {
+    text-align: end;
 }
