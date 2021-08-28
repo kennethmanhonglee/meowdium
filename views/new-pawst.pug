@@ -12,6 +12,7 @@ block nav-bar
     div(class='spacer')
     div(class='user-utils')
       div(class='logged-in-user')
+        a(href=`/users/${userId}` class='username-btn') #{user.userName}
         a(href=`/users/${userId}` class='btn btn-pawst') Your Pawsts
         form(action='/users/logout' method='post')
           button(class='btn btn-logout' type='submit') Logout

@@ -18,6 +18,7 @@ html
         div(class='user-utils')
           if locals.authenticated
             div(class='logged-in-user')
+              a(href=`/users/${user.id}` class='username-btn') #{user.userName}
               a(href="/pawsts/new" class='btn btn-pawst') Pawst
               form(action='/users/logout' method='post')
                 button(class='btn btn-logout' type='submit') Logout

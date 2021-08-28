@@ -113,3 +113,15 @@ input.form-control:focus-visible {
   outline-width: 0;
   border-color: #ffbdc6;
 }
+
+.username-btn:hover {
+  font-weight: bold;
+}
+
+.btn-pawst:hover {
+  font-weight: bold;
+}
+
+.btn-signup:hover {
+  font-weight: bold;
+}
