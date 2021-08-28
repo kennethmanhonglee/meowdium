@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       let {
         id,
+        userId,
         content,
         userName,
         updatedAt } = await res.json();
@@ -37,7 +38,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const commenterNameDiv = document.createElement('div');
       commenterNameDiv.setAttribute('class', 'commenter-name');
-      commenterNameDiv.textContent = userName;
+      const commenterNameLink = document.createElement('a')
+      commenterNameLink.setAttribute("href", `/users/${userId}`);
+      commenterNameLink.setAttribute('class', 'commenter-name-link')
+      commenterNameLink.textContent = userName;
+      commenterNameDiv.appendChild(commenterNameLink)
       const pawmentDateDiv = document.createElement('div');
       pawmentDateDiv.setAttribute('class', 'pawment-date');
       pawmentDateDiv.textContent = updatedAt;

@@ -45,13 +45,14 @@ block content
             form(id='new-pawment-form' action='#')
               input(type='hidden' name='_csrf' value=csrfToken)
               +field('content', content, 'textarea', 'Pawment')
-              div(class='')
+              div(class='comment-submit-btn')
                 button(id='comment-submit' type='submit' class='btn btn-primary') Submit
         div(id='pawments-list')
           each pawment in pawments
             div(class=`pawment pawment-${pawment.id}`)
               div(class="pawmenter-info")
-                div(class="commenter-name")= pawment.User.userName
+                div(class="commenter-name")
+                    a(href=`/users/${pawment.User.id}` class='commenter-name-link')= pawment.User.userName
                 div(class="pawment-date")= pawment.updatedAt.toDateString()
                 input(type="hidden", value=pawment.id, id=pawment.id)
               div(class="pawment-content")= pawment.content
