@@ -1,5 +1,14 @@
 /* Index Styling */
 
+.logo-img {
+    width: auto;
+    height: 25px;
+}
+
+.logo {
+  align-self: flex-end;
+}
+
 .feed {
   display: flex;
   flex-direction: column;

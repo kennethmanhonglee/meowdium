@@ -91,8 +91,14 @@ form .btn.btn-primary:hover {
   background-color: #ffbdc6;
 }
 
+.logo-img {
+   width: auto;
+   height: 25px;
+}
 
-
+.logo {
+  align-self: flex-end;
+}
 .form-container .errors {
   margin-bottom: 20px;
 }
@@ -111,6 +117,18 @@ input.form-control:focus-visible {
   border-color: #ffbdc6;
 }
 
+
+.username-btn:hover {
+  font-weight: bold;
+}
+
+.btn-pawst:hover {
+  font-weight: bold;
+}
+
+.btn-signup:hover {
+  font-weight: bold;
+}
 
 #github-icon {
   max-height: 30px;

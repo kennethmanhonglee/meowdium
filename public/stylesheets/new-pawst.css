@@ -9,6 +9,14 @@ input.form-control {
   margin-bottom: 10px;
 }
 
+.logo-img {
+   width: auto;
+   height: 25px;
+}
+
+.logo {
+  align-self: flex-end;
+}
 
 #title {
     font-size: larger;

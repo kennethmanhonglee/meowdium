@@ -8,10 +8,12 @@ block nav-bar
   div(class='nav-bar')
     div(class='logo')
       a(href='/' class='logo-link')
+        img(src='../images/Meowdium-Logo.png' class='logo-img')
     div(class='spacer')
     div(class='user-utils')
       div(class='logged-in-user')
-        a(href="/pawsts/new" class='btn btn-pawst') Pawst
+        a(href=`/users/${userId}` class='username-btn') #{user.userName}
+        a(href=`/users/${userId}` class='btn btn-pawst') Your Pawsts
         form(action='/users/logout' method='post')
           button(class='btn btn-logout' type='submit') Logout
 
