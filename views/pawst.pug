@@ -28,17 +28,17 @@ block content
       hr
       div(class="content")
         pre(id='post-content')= post.content
+      hr
       div(class="pawst-content-footer")
-        div(class="author")= userName
+        div(class="author")
+            a(href=`/users/${post.userId}` class='author-link-footer')= userName
         div(class="likes-stats")
           div(class="like-icon")
             span(class="material-icons like-btn") pets
           div(class="like-count")
             p(class="like-display")= catnipsCount
             //- send back like amount
-        div(class="pawments-stats")
-          div(class="pawment-icon")
-          div(class="pawment-count")
+
       div(id="pawments-container")
         h3 Pawments
         if locals.authenticated
@@ -46,13 +46,14 @@ block content
             form(id='new-pawment-form' action='#')
               input(type='hidden' name='_csrf' value=csrfToken)
               +field('content', content, 'textarea', 'Pawment')
-              div(class='')
+              div(class='comment-submit-btn')
                 button(id='comment-submit' type='submit' class='btn btn-primary') Submit
         div(id='pawments-list')
           each pawment in pawments
             div(class=`pawment pawment-${pawment.id}`)
               div(class="pawmenter-info")
-                div(class="commenter-name")= pawment.User.userName
+                div(class="commenter-name")
+                    a(href=`/users/${pawment.User.id}` class='commenter-name-link')= pawment.User.userName
                 div(class="pawment-date")= pawment.updatedAt.toDateString()
                 input(type="hidden", value=pawment.id, id=pawment.id)
               div(class="pawment-content")= pawment.content
@@ -62,5 +63,17 @@ block content
                   button(class=`delete-button-${pawment.id}`) Delete
                   button(class=`edit-cancel-button-${pawment.id}` hidden) Cancel
                   button(class=`edit-submit-button-${pawment.id}` hidden) Submit
+block footer 
+  div(class='footer-bar')
+    div(class='github-links')
+      image(id="github-icon" src="../images/github-mark.png", alt="")        
+      div(class='al-div names')
+        a(target="_blank" href="https://github.com/AlwynGrant") Alwyn
+      div(class='kenneth-div names')        
+        a(target="_blank" href="https://github.com/kennethmanhonglee") Kenneth
+      div(class='kris-div names')        
+        a(target="_blank" href="https://github.com/kristopher-castillo") Kris
+      div(class='michael-div names')        
+        a(target="_blank" href="https://github.com/MCE-Design") Michael
 
-  script(type='module' src="/javascripts/index.js")
+  script(type='module' src="/javascripts/pawsts.js")
