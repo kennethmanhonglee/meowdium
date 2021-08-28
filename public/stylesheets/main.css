@@ -89,9 +89,13 @@ form .btn.btn-primary:hover {
 }
 
 .logo-img {
-    height: 40px;
+   width: auto;
+   height: 25px;
 }
 
+.logo {
+  align-self: flex-end;
+}
 .form-container .errors {
   margin-bottom: 20px;
 }

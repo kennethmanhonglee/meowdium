@@ -15,7 +15,12 @@
 } */
 
 .logo-img {
-    height: 40px;
+    width: auto;
+    height: 25px;
+}
+
+.logo {
+  align-self: flex-end;
 }
 
 .pawst-body {

@@ -8,8 +8,17 @@ html {
   background-size: 400px;
 }
 
+.nav-bar .spacer {
+    flex: 1 0 auto;
+}
+
 .logo-img {
-    height: 40px;
+    width: auto;
+    height: 25px;
+}
+
+.logo {
+  align-self: flex-end;
 }
 
 .form-container {

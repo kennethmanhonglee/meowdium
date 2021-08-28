@@ -27,12 +27,13 @@ router.get('/new', csrfProtection, asyncHandler(async (req, res) => {
   if (!res.locals.authenticated) {
     return res.redirect('/users/login');
   }
-
+  const userId = res.locals.user.dataValues.id
   const post = await Pawst.build();
   return res.render('new-pawst', {
     title: 'New Pawst',
     post,
-    csrfToken: req.csrfToken()
+    csrfToken: req.csrfToken(),
+    userId
   });
 }));
 
