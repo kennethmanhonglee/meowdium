@@ -1,6 +1,9 @@
 extends layout
 include utils
 
+block head
+  link(rel='stylesheet' href='/stylesheets/edit-pawst.css')
+
 block nav-bar
   div(class='nav-bar')
     div(class='logo')
@@ -13,12 +16,17 @@ block nav-bar
           button(class='btn btn-logout' type='submit') Logout
 
 block content
-  +validationErrorSummary(errors)
-  form(action=`/pawsts/${post.id}/edit` method='post')
-    input(type='hidden' name='_csrf' value=csrfToken)
-    +field('title', post.title, 'text', 'Title')
-    div(class='form-group')
-      input(type='text' id='subtitle' name='subtitle' value=post.subtitle placeholder='Subtitle' class='form-control')
-    +field('content', post.content, 'textarea', 'Meow your heart out...')
-    div(class='')
-      button(type='submit' class='btn btn-primary') Submit
+  div.content
+    div.edit-pawst-top.top-section
+      h2 Edit Pawst
+    div.edit-pawst-bottom
+      div.form-container
+        +validationErrorSummary(errors)
+        form(action=`/pawsts/${post.id}/edit` method='post')
+          input(type='hidden' name='_csrf' value=csrfToken)
+          +field('title', post.title, 'text', 'Title')
+          div(class='form-group')
+            input(type='text' id='subtitle' name='subtitle' value=post.subtitle placeholder='Subtitle' class='form-control')
+          +field('content', post.content, 'textarea', 'Meow your heart out...')
+          div(class='')
+            button(type='submit' class='btn btn-primary') Submit

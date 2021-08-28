@@ -1,5 +1,13 @@
 /* Signup Styling */
 
+html {
+  min-height: 100%;
+  background-image: url('../images/cat-4475583_640.png');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 20px) calc(100% + 155px);
+  background-size: 400px;
+}
+
 .signup-top {
 
 }
@@ -22,4 +30,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+input.form-control {
+  min-width: 200px;
+}
+
+.demo-div {
+  margin-top: 20px;
 }

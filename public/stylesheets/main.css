@@ -3,6 +3,7 @@
 body {
   font-family: 'PT Serif', Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 21px;
+  color: #5F5F5F;
 }
 
 h1 {
@@ -13,19 +14,27 @@ h2 {
   font-size: 3.5rem;
 }
 
+h3 {
+  font-size: 1.5rem;
+}
+
 .btn {
   border-radius: 99em;
   padding: 10px;
+  transition: background-color .75s;
   cursor: pointer;
 }
 form .btn.btn-primary {
   width: 200px;
-  background-color: #292929;
-  color: #FFFFFF;
+  /* background-color: #292929; */
+  background-color: #ffd7dc;
+  /* color: #FFFFFF; */
+  color: #666666;
 }
 
 form .btn.btn-primary:hover {
-  background-color: #080808;
+  /* background-color: #080808; */
+  background-color: #ffbdc6;
 }
 
 .content {
@@ -44,15 +53,18 @@ form .btn.btn-primary:hover {
   box-sizing: border-box;
   display: flex;
   min-height: 75px;
-  background-color: #FFFFFF;
+  background-color: #fff0f2;
   padding: 5px 20px;
-  border: 1px solid #000000;
+  border: 1px solid #fff0f2;
+  box-shadow: 0px 1px 3px rgb(255 100 100 / 30%);
   border-width: 0 0 1px;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
 }
 
 .nav-bar a {
   text-decoration: none;
+  color: #666666;
 }
 .nav-bar .spacer {
   flex: 1 0 auto;
@@ -62,6 +74,21 @@ form .btn.btn-primary:hover {
   display: flex;
   align-items: center;
 }
+
+.nav-bar .btn.btn-logout,
+.nav-bar .btn.btn-login {
+  background-color: #ffd7dc;
+  font-size: 1rem;
+  color: #5F5F5F;
+}
+
+
+.nav-bar .btn.btn-logout:hover,
+.nav-bar .btn.btn-login:hover {
+  background-color: #ffbdc6;
+}
+
+
 
 .form-container .errors {
   margin-bottom: 20px;
@@ -73,9 +100,10 @@ input.form-control {
   border-width: 0 0 1px 0;
   border-radius: 0;
   margin: 0 0 10px;
+  color: #666666;
 }
 
 input.form-control:focus-visible {
   outline-width: 0;
-  border-color: #000000;
+  border-color: #ffbdc6;
 }

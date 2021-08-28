@@ -1,9 +1,25 @@
 /* Login Styling */
 
+html {
+  min-height: 100%;
+  background-image: url('../images/cat-4475583_640.png');
+  background-repeat: no-repeat;
+  background-position: calc(100% - 20px) calc(100% + 155px);
+  background-size: 400px;
+}
+
 .login-top {
   margin: 50px 0 25px;
 }
 
 .form-container .form-group:nth-last-child(2) {
   margin-bottom: 10px;
+}
+
+input.form-control {
+  min-width: 200px;
+}
+
+.demo-div {
+  margin-top: 20px;
 }

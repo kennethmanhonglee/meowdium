@@ -1,3 +1,59 @@
-h1 {
-    color: #555555;
+/* Index Styling */
+
+.feed {
+  display: flex;
+  flex-direction: column;
+}
+
+.feed .post {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-width: 500px;
+  padding: 0 0 10px;
+  border: 1px solid #ffbdc6;
+  border-width: 0 0 1px;
+  margin-bottom: 20px;
+}
+
+.feed .post a {
+  text-decoration: none;
+}
+
+.post .post-link {
+  margin-bottom: 15px;
+}
+
+.post .post-title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  font-family: 'Didact Gothic', sans-serif;
+  margin-bottom: 5px;
+}
+
+.post .post-subtitle,
+.post .post-info {
+  font-family: 'Didact Gothic', sans-serif;
+  color: #888888;
+}
+
+.post .post-subtitle {
+  font-size: 0.95rem;
+}
+
+.post .post-info {
+  display: flex;
+  align-items: center;
+}
+
+.author-link {
+  margin-right: 5px;
+}
+.author-link::after {
+  content: " •";
+}
+
+.post-user,
+.post-time {
+  font-size: 0.85rem;
 }
