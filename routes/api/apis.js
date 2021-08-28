@@ -29,13 +29,9 @@ router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
         where: pawstId
     });
 
-    console.log('catnips count before', typeof (catnipsCount));
-
     if (existingCatnip) {
         // unlike post - delete catnip from db, send back 'deleted'
         await existingCatnip.destroy();
-        // catnipsCount--;
-        console.log('catnips count after deleting', catnipsCount);
         return res.status(200).json({
             catnipsCount,
             deleted: true
@@ -46,7 +42,6 @@ router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
             userId
         })
         catnipsCount++;
-        console.log('catnips count after creating', catnipsCount);
         return res.status(201).json({
             catnipsCount,
             deleted: false
@@ -60,9 +55,7 @@ router.post('/pawments/:id(\\d+)/delete', asyncHandler(async (req, res) => {
     }
 
     const pawmentId = parseInt(req.params.id, 10);
-    console.log('this is thwe pawmentId', pawmentId);
     const pawmentToDelete = await Pawment.findByPk(pawmentId);
-    console.log(pawmentToDelete);
     if (res.locals.user.id === pawmentToDelete.userId) {
         await pawmentToDelete.destroy();
         return res.status(200).json({ pawmentId });
@@ -79,7 +72,6 @@ router.post('/pawments/:id(\\d+)/edit', pawmentValidators, asyncHandler(async (r
     const { content } = req.body
     const pawmentId = parseInt(req.params.id, 10);
     const pawment = await Pawment.findByPk(pawmentId);
-    // console.log('CONTENT!!!!!!', content);
     if (res.locals.user.id !== pawment.userId) {
         return res.status(404).json('Unauthorized User.')
     }
