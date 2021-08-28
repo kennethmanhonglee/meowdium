@@ -8,6 +8,11 @@ html {
   background-size: 400px;
 }
 
+.logo-img {
+    height: 40px;
+
+}
+
 .login-top {
   margin: 50px 0 25px;
 }

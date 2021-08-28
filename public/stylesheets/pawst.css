@@ -14,6 +14,10 @@
     padding: 15px;
 } */
 
+.logo-img {
+    height: 40px;
+}
+
 .pawst-body {
     display: flex;
     flex-direction: column;

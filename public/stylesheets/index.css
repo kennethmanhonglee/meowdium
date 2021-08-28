@@ -1,5 +1,9 @@
 /* Index Styling */
 
+.logo-img {
+    height: 40px;
+}
+
 .feed {
   display: flex;
   flex-direction: column;
