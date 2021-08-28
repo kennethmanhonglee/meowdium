@@ -156,3 +156,7 @@ input.form-control:focus-visible {
   justify-content: center;
   align-items: center;
 }
+
+.post-user:hover {
+  text-decoration: underline;
+}
