@@ -44,7 +44,7 @@ form .btn.btn-primary:hover {
 }
 
 .top-section {
-  padding: 30px 0;
+  padding: 60px 0;
 }
 
 .nav-bar{
@@ -148,7 +148,7 @@ input.form-control:focus-visible {
   font-size: 1rem;
 }
 
-.container {
+.content {
   padding-bottom: 75px;
 }
 

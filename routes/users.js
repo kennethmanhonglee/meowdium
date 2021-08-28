@@ -66,12 +66,15 @@ const loginValidators = [
     .withMessage('Hint: Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*()")')
 ];
 
-router.get('/:id(\\d+)', asyncHandler(async(req, res) => {
+router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
   if (!res.locals.authenticated) res.redirect('/users/login');
   const userId = parseInt(req.params.id, 10);
   const user = await User.findByPk(userId);
   const { userName, email } = user;
-  const posts = await Pawst.findAll({ where: { userId } })
+  const posts = await Pawst.findAll({
+    where: { userId },
+    limit: 15
+  })
   return res.render('user-page', {
     title: userName,
     posts,
