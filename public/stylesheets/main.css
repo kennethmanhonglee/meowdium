@@ -47,12 +47,13 @@ form .btn.btn-primary:hover {
   padding: 30px 0;
 }
 
-.nav-bar {
+.nav-bar{
   position: sticky;
   top: 0px;
   box-sizing: border-box;
   display: flex;
   min-height: 75px;
+  max-height: 75px;
   background-color: #fff0f2;
   padding: 5px 20px;
   border: 1px solid #fff0f2;
@@ -61,6 +62,8 @@ form .btn.btn-primary:hover {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
 }
+
+
 
 .nav-bar a {
   text-decoration: none;
@@ -106,4 +109,50 @@ input.form-control {
 input.form-control:focus-visible {
   outline-width: 0;
   border-color: #ffbdc6;
+}
+
+
+#github-icon {
+  max-height: 30px;
+  margin-top: 20px;
+}
+
+.names {
+  display: inline-block;
+  margin: 0 20px;
+  padding-bottom: 20px;
+}
+
+.names a {
+  text-decoration: none;
+}
+
+.names a:hover {
+  font-weight: bold;
+}
+
+.footer-bar {
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+  display: flex;
+  min-height: 75px;
+  max-height: 75px;
+  width: 100%;
+  background-color: #fff0f2;
+  padding: 5px 20px;
+  border: 1px solid #fff0f2;
+  box-shadow: 0px 1px 3px rgb(255 100 100 / 30%);
+  border-width: 0 0 1px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}
+
+.container {
+  padding-bottom: 75px;
+}
+
+.footer-bar, .github-links {
+  justify-content: center;
+  align-items: center;
 }
