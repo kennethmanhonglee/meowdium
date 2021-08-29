@@ -8,15 +8,6 @@ html {
   background-size: 400px;
 }
 
-.logo-img {
-    width: auto;
-    height: 25px;
-}
-
-.logo {
-  align-self: center;
-}
-
 .login-top {
   margin: 50px 0 25px;
 }

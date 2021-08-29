@@ -8,19 +8,6 @@ html {
   background-size: 400px;
 }
 
-.nav-bar .spacer {
-    flex: 1 0 auto;
-}
-
-.logo-img {
-    width: auto;
-    height: 25px;
-}
-
-.logo {
-  align-self: center;
-}
-
 .form-container {
   display: flex;
   flex-direction: column;

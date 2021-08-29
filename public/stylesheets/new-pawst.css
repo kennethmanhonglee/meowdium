@@ -9,34 +9,27 @@ input.form-control {
   margin-bottom: 10px;
 }
 
-.logo-img {
-   width: auto;
-   height: 25px;
-}
-
-.logo {
-  align-self: center;
-}
-
 #title {
-    font-size: larger;
-    border: none;
+  font-size: larger;
+  border: none;
 }
 
 #subtitle {
-    font-size: larger;
-    border: none;
+  font-size: larger;
+  border: none;
 }
 
 #content {
-    box-sizing: border-box;
-    padding: 10px;
-    resize: vertical;
-    min-height: 300px;
-    min-width: 500px;
-    outline: none;
-    border: none;
-    font-size: large;
+  box-sizing: border-box;
+  padding: 10px;
+  resize: vertical;
+  min-height: 300px;
+  min-width: 500px;
+  outline: none;
+  border: none;
+  font-size: large;
+  color: #333333;
+  background-color: #FFF8FA;
 }
 
 .new-pawst-submit {

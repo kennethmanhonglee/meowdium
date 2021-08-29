@@ -7,7 +7,6 @@ block content
   div.content
     div.index-top.top-section
       h2
-      hr
     div(class='feed')
       each post in posts
         div(class='post')
@@ -20,4 +19,4 @@ block content
               span(class='post-user')= post.User.userName
             span(class='post-time')= post.updatedAt.toDateString()
 
-  script(type="module" src="/javascripts/index.js") 
+  script(type="module" src="/javascripts/index.js")
