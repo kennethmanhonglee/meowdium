@@ -231,6 +231,12 @@ hr {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
+  border: 1px solid #ffd7dc;
+  border-radius: 5px;
+}
+.new-pawment-box textarea:focus {
+  outline: none;
+  border: 1px solid #ffa4b0;
 }
 
 .pawment {
@@ -294,6 +300,11 @@ text-align: left;
 .pawment-content:hover {
   background-color: rgba(255, 215, 220, .5);
 }
+
+.pawment-content:focus {
+  box-shadow: inset 0px 1px 3px rgb(255 120 120 / 30%);
+}
+
 .pawment-buttons {
   display: flex;
   flex-direction: row;
