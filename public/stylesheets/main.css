@@ -97,7 +97,7 @@ form .btn.btn-primary:hover {
 }
 
 .logo {
-  align-self: flex-end;
+  align-self: center;
 }
 .form-container .errors {
   margin-bottom: 20px;
