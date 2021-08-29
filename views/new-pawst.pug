@@ -13,7 +13,7 @@ block nav-bar
     div(class='user-utils')
       div(class='logged-in-user')
         a(href=`/users/${userId}` class='username-btn') #{user.userName}
-        a(href=`/users/${userId}` class='btn btn-pawst') Your Pawsts
+        a(href=`/users/${userId}` class='btn btn-your-pawsts') Your Pawsts
         form(action='/users/logout' method='post')
           button(class='btn btn-logout' type='submit') Logout
 
@@ -32,15 +32,15 @@ block content
           +field('content', post.content, 'textarea', 'Meow your heart out...')
           div(class= 'new-pawst-submit')
             button(type='submit' class='btn btn-primary') Submit
-block footer 
+block footer
   div(class='footer-bar')
     div(class='github-links')
-      image(id="github-icon" src="../images/github-mark.png", alt="")        
+      image(id="github-icon" src="../images/github-mark.png", alt="")
       div(class='al-div names')
         a(target="_blank" href="https://github.com/AlwynGrant") Alwyn
-      div(class='kenneth-div names')        
+      div(class='kenneth-div names')
         a(target="_blank" href="https://github.com/kennethmanhonglee") Kenneth
-      div(class='kris-div names')        
+      div(class='kris-div names')
         a(target="_blank" href="https://github.com/kristopher-castillo") Kris
-      div(class='michael-div names')        
+      div(class='michael-div names')
         a(target="_blank" href="https://github.com/MCE-Design") Michael

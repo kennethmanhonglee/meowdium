@@ -37,7 +37,9 @@
     font-size: 1.5rem;
     text-align: start;
 }
-
+.author-utils {
+  margin-top: 10px;
+}
 .post-author, .like-display {
     font-size: 1.1rem;
     text-align: start;
@@ -104,6 +106,7 @@ hr {
 .btn-edit-submit {
   padding: 5px;
   border-radius: 0.25em;
+  margin: 0px 3px ;
 }
 .btn-edit:hover,
 .btn-delete:hover,
@@ -129,9 +132,10 @@ hr {
 
 
 #post-content {
-    width: inherit;
-    white-space: pre-wrap;
-    font-family: Arial, Helvetica, sans-serif;
+  width: inherit;
+  white-space: pre-wrap;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-wrap: break-word;
 }
 
 .pawst-content-footer {
@@ -155,15 +159,16 @@ hr {
 }
 
 #pawments-container {
-    width: 50%;
+  width: 50%;
+  min-width: 500px;
 }
 
 .form-group, h3 {
-    text-align: center;
+  text-align: center;
 }
 
 .comment-submit-btn {
-    text-align: center;
+  text-align: center;
 }
 
 .pawst-content-footer .author {
@@ -208,20 +213,33 @@ hr {
 }
 
 .new-pawment-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
   margin-bottom: 30px;
+}
+
+#new-pawment-form,
+#new-pawment-form .form-group {
+  width: 100%;
 }
 
 .new-pawment-box textarea {
   resize: vertical;
+  box-sizing: border-box;
   min-width: 500px;
+  width: 100%;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .pawment {
+  box-sizing: border-box;
+  min-width: 500px;
   padding: 0 0 15px;
   border: 1px solid #ffd7dc;
   border-width: 0 0 1px;
+  overflow-wrap: break-word;
   margin-bottom: 20px;
   opacity: 100%;
   transition: opacity .75s;
@@ -283,8 +301,4 @@ text-align: left;
 
 #pawments-list > div {
     text-align: center;
-}
-
-button {
-    margin: 0px 3px ;
 }

@@ -87,6 +87,30 @@ align-self: center;
 .nav-bar .spacer {
   flex: 1 0 auto;
 }
+
+.btn.btn-pawst{
+  width: 65px;
+  text-align: center;
+}
+
+.btn.btn-pawst:hover {
+  font-weight: bold;
+}
+
+.btn.btn-signup:hover {
+  font-weight: bold;
+}
+
+.btn.btn-your-pawsts {
+  width: 115px;
+  text-align: center;
+}
+
+.btn.btn-your-pawsts:hover {
+  font-weight: bold;
+}
+
+
 .nav-bar .user-utils,
 .nav-bar .user-utils .logged-in-user {
   display: flex;
@@ -99,7 +123,6 @@ align-self: center;
   font-size: 1rem;
   color: #5F5F5F;
 }
-
 
 .nav-bar .btn.btn-logout:hover,
 .nav-bar .btn.btn-login:hover {
@@ -114,6 +137,7 @@ align-self: center;
 .logo {
   align-self: center;
 }
+
 .form-container .errors {
   margin-bottom: 20px;
 }
@@ -137,27 +161,32 @@ input.form-control:focus-visible {
   font-weight: bold;
 }
 
-.btn-pawst:hover {
-  font-weight: bold;
-}
-
-.btn-signup:hover {
-  font-weight: bold;
-}
-
 #github-icon {
   max-height: 30px;
-  margin-top: 20px;
+  margin-right: 10px;
 }
 
 .names {
   display: inline-block;
-  margin: 0 20px;
-  padding-bottom: 20px;
+  margin: 0 15px;
+  text-align: center;
 }
 
 .names a {
   text-decoration: none;
+}
+
+.al-div {
+  width: 47px;
+}
+.kenneth-div {
+  width: 64px;
+}
+.kris-div {
+  width: 27px;
+}
+.michael-div {
+  width: 55px;
 }
 
 .names a:hover {
@@ -174,8 +203,8 @@ input.form-control:focus-visible {
   width: 100%;
   background-color: #fff0f2;
   padding: 5px 20px;
-  border: 1px solid #fff0f2;
-  box-shadow: 0px 1px 3px rgb(255 100 100 / 30%);
+  border: 1px solid #fff4f6;
+  box-shadow: 0px -1px 3px rgb(255 150 100 / 30%);
   border-width: 0 0 1px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
@@ -186,6 +215,7 @@ input.form-control:focus-visible {
 }
 
 .footer-bar, .github-links {
+  display: flex;
   justify-content: center;
   align-items: center;
 }
