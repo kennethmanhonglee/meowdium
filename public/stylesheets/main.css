@@ -11,7 +11,12 @@ h1 {
 }
 
 h2 {
-  font-size: 3.5rem;
+  font-size: 3.25rem;
+  background-color: rgba(255, 0, 0, 0.02);
+  border-radius: 10px;
+  padding: 0px 20px;
+  box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.03);
+
 }
 
 h3 {
@@ -97,7 +102,7 @@ form .btn.btn-primary:hover {
 }
 
 .logo {
-  align-self: flex-end;
+  align-self: center;
 }
 .form-container .errors {
   margin-bottom: 20px;
@@ -174,10 +179,17 @@ input.form-control:focus-visible {
   justify-content: center;
   align-items: center;
 }
-<<<<<<< HEAD
-=======
 
 .post-user:hover {
   text-decoration: underline;
 }
->>>>>>> 2d7764ac42a30ff343c9fc0c101c687c1c2a0485
+
+.index-top {
+  padding: 40px 0px;
+}
+
+hr {
+  height: 1px;
+  background-color: rgba(255, 0, 0, 0.3);
+  border: none;
+}

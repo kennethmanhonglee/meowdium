@@ -6,8 +6,10 @@
 }
 
 .logo {
-  align-self: flex-end;
+  align-self: center;
 }
+
+
 
 .feed {
   display: flex;
@@ -67,3 +69,4 @@
 .post-time {
   font-size: 0.85rem;
 }
+
