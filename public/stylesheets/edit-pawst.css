@@ -7,6 +7,15 @@ input.form-control {
   margin-bottom: 10px;
 }
 
+.logo {
+  align-self: flex-end;
+}
+
+.logo-img {
+    width: auto;
+    height: 25px;
+}
+
 #title {
     font-size: larger;
     border: none;

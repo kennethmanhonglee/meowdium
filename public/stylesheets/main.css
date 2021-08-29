@@ -44,7 +44,7 @@ form .btn.btn-primary:hover {
 }
 
 .top-section {
-  padding: 30px 0;
+  padding: 60px 0;
 }
 
 .nav-bar{
@@ -91,8 +91,14 @@ form .btn.btn-primary:hover {
   background-color: #ffbdc6;
 }
 
+.logo-img {
+   width: auto;
+   height: 25px;
+}
 
-
+.logo {
+  align-self: flex-end;
+}
 .form-container .errors {
   margin-bottom: 20px;
 }
@@ -111,6 +117,18 @@ input.form-control:focus-visible {
   border-color: #ffbdc6;
 }
 
+
+.username-btn:hover {
+  font-weight: bold;
+}
+
+.btn-pawst:hover {
+  font-weight: bold;
+}
+
+.btn-signup:hover {
+  font-weight: bold;
+}
 
 #github-icon {
   max-height: 30px;
@@ -148,7 +166,7 @@ input.form-control:focus-visible {
   font-size: 1rem;
 }
 
-.container {
+.content {
   padding-bottom: 75px;
 }
 
@@ -156,3 +174,10 @@ input.form-control:focus-visible {
   justify-content: center;
   align-items: center;
 }
+<<<<<<< HEAD
+=======
+
+.post-user:hover {
+  text-decoration: underline;
+}
+>>>>>>> 2d7764ac42a30ff343c9fc0c101c687c1c2a0485

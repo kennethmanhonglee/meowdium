@@ -8,8 +8,17 @@ html {
   background-size: 400px;
 }
 
-.signup-top {
+.nav-bar .spacer {
+    flex: 1 0 auto;
+}
 
+.logo-img {
+    width: auto;
+    height: 25px;
+}
+
+.logo {
+  align-self: flex-end;
 }
 
 .form-container {
