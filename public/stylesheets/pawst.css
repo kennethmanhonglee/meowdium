@@ -20,7 +20,7 @@
 }
 
 .logo {
-  align-self: flex-end;
+  align-self: center;
 }
 
 .pawst-body {
@@ -63,14 +63,14 @@ hr {
 }
 
 .author-link-footer {
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
     text-decoration: none;
     color: rgba(255, 0, 0, 0.3);
     text-transform: capitalize;
 }
 
 .like-btn, .like-display {
-    font-size: 2rem; 
+    font-size: 2rem;
     color: rgba(255, 0, 0, 0.3);
 }
 
@@ -167,7 +167,7 @@ hr {
 
 .pawst-content-footer .author {
   margin-right: 10px;
-  
+
 }
 
 .author {
@@ -184,7 +184,7 @@ hr {
 
 .likes-stats:hover {
     background-color: rgba(255, 0, 0, 0.03);
-    border-radius: 8px; 
+    border-radius: 8px;
 }
 
 .like-icon,
@@ -266,7 +266,7 @@ text-align: left;
   color: #333333;
   margin-bottom: 5px;
   background-color:rgba(255, 215, 220, .25);
-  border-radius: 8px; 
+  border-radius: 8px;
   transition: background-color .3s;
   text-align: left;
 }
