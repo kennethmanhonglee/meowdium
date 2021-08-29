@@ -77,9 +77,22 @@ form .btn.btn-primary:hover {
 }
 
 .logo {
-align-self: center;
+  align-self: center;
+  /* transition: transform 0.75s; */
 }
-
+.logo:hover {
+  animation-duration: 1s;
+  animation-name: jostle;
+  animation-iteration-count: infinite;
+}
+@keyframes jostle {
+  25% {
+    transform: translate(0, -5px);
+  }
+  50% {
+    transform: translate(0, 0);
+  }
+}
 .nav-bar a {
   text-decoration: none;
   color: #666666;
@@ -127,15 +140,6 @@ align-self: center;
 .nav-bar .btn.btn-logout:hover,
 .nav-bar .btn.btn-login:hover {
   background-color: #ffbdc6;
-}
-
-.logo-img {
-   width: auto;
-   height: 25px;
-}
-
-.logo {
-  align-self: center;
 }
 
 .form-container .errors {
