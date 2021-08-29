@@ -9,6 +9,8 @@
   align-self: flex-end;
 }
 
+
+
 .feed {
   display: flex;
   flex-direction: column;
@@ -67,3 +69,4 @@
 .post-time {
   font-size: 0.85rem;
 }
+
