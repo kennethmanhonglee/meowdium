@@ -9,15 +9,6 @@ input.form-control {
   margin-bottom: 10px;
 }
 
-.logo-img {
-   width: auto;
-   height: 25px;
-}
-
-.logo {
-  align-self: center;
-}
-
 #title {
     font-size: larger;
     border: none;

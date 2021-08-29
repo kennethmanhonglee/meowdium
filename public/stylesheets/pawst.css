@@ -14,15 +14,6 @@
     padding: 15px;
 } */
 
-.logo-img {
-    width: auto;
-    height: 25px;
-}
-
-.logo {
-  align-self: center;
-}
-
 .pawst-body {
     display: flex;
     flex-direction: column;
