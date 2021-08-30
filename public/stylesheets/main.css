@@ -52,7 +52,7 @@ form .btn.btn-primary:hover {
 }
 
 .top-section {
-  padding: 60px 0;
+  padding: 25px 0;
 }
 
 .nav-bar{
@@ -230,4 +230,17 @@ input.form-control:focus-visible {
 
 .index-top {
   padding: 40px 0px;
+}
+
+.login-bottom {
+  width: 30%;
+  word-wrap: normal;
+}
+
+li {
+  list-style: none;
+}
+
+.form-container {
+  text-align: center;
 }
