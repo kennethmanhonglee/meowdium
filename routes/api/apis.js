@@ -26,12 +26,15 @@ router.post('/pawsts/:id(\\d+)/catnips', asyncHandler(async (req, res) => {
         }
     })
     let catnipsCount = await Catnip.count({
-        where: pawstId
+        where: {
+            pawstId: pawstId
+        }
     });
 
     if (existingCatnip) {
         // unlike post - delete catnip from db, send back 'deleted'
         await existingCatnip.destroy();
+        catnipsCount--;
         return res.status(200).json({
             catnipsCount,
             deleted: true
