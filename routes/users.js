@@ -20,7 +20,16 @@ const signupValidators = [
     .isLength({ min: 2, max: 50 })
     .withMessage('Your Username must between 1 and 50 characters long.')
     .matches(/\w+/)
-    .withMessage('Your Username must be alphanumeric. Example: ( a-z, A-Z, _ )'),
+    .withMessage('Your Username must be alphanumeric. Example: ( a-z, A-Z, _ )')
+    .custom((value) => {
+      if (value) {
+        return User.findOne({ where: { userName: value } })
+          .then((user) => {
+            if (user) return Promise.reject('The provided username is already in use.')
+          })
+      }
+      return Promise.resolve();
+    }),
   check('email')
     .isLength({ max: 255 })
     .withMessage('Email address must not be longer than 255 characters.')
