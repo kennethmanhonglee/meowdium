@@ -70,7 +70,7 @@ const loginValidators = [
     .exists({ checkFalsy: true })
     .withMessage('Please input a valid Password.')
     .isLength({ min: 8, max: 50 })
-    .withMessage('Hint: Password must not be longer than 50 characters.')
+    .withMessage('Hint: Password must be between 8 and 50 characters.')
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
     .withMessage('Hint: Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*()")')
 ];
