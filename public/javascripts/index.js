@@ -48,7 +48,10 @@ const catPuns = [
     `I love your purr-se.`,
     `My cat wants a Furr-ari.`,
     `I’ve got my thinking cat on.`,
-    `Wait a meow-ment.`
+    `Wait a meow-ment.`,
+    `Eat, drink, and be meowy!`,
+    `Now hear meowt...`,
+    `Live in the meow-ment!`
 ];
 
 const getRandomInt = (max) => {
