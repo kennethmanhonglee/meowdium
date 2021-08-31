@@ -64,21 +64,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         pawmentButtonsDiv.setAttribute('class', 'pawment-buttons');
         const pawmentEditButton = document.createElement('button');
         pawmentEditButton.setAttribute('value', id);
+        pawmentEditButton.className += `edit-button-${id}`;
+        pawmentEditButton.className += ' btn';
+        pawmentEditButton.className += ' btn-edit';
         pawmentEditButton.textContent = 'Edit';
         const pawmentDeleteButton = document.createElement('button');
         pawmentDeleteButton.setAttribute('value', id);
+        pawmentDeleteButton.className += `delete-button-${id}`;
+        pawmentDeleteButton.className += ' btn';
+        pawmentDeleteButton.className += ' btn-delete';
         pawmentDeleteButton.textContent = 'Delete';
+
+        const editSubmitButton = document.createElement('button');
+        editSubmitButton.className += `edit-submit-button-${id}`;
+        editSubmitButton.className += ' btn';
+        editSubmitButton.className += ' btn-edit-submit';
+        editSubmitButton.textContent = 'Submit'
+        const editCancelButton = document.createElement('button');
+        editCancelButton.className += `edit-cancel-button-${id}`;
+        editCancelButton.className += ' btn';
+        editCancelButton.className += ' btn-edit-cancel';
+        editCancelButton.textContent = 'Cancel'
+        editSubmitButton.setAttribute('hidden', 'true');
+        editCancelButton.setAttribute('hidden', 'true');
+
+
         pawmentEditButton.addEventListener('click', async (e) => {
 
           pawmentContentDiv.setAttribute('contentEditable', 'true');
           pawmentEditButton.setAttribute('hidden', 'true');
           pawmentDeleteButton.setAttribute('hidden', 'true');
+          editSubmitButton.removeAttribute('hidden');
+          editCancelButton.removeAttribute('hidden');
 
-          const editSubmitButton = document.createElement('button');
-          editSubmitButton.textContent = 'Submit'
-          const editCancelButton = document.createElement('button');
-          editCancelButton.textContent = 'Cancel'
-          pawmentButtonsDiv.append(editCancelButton, editSubmitButton);
           editSubmitButton.addEventListener('click', async (e) => {
             const apiPath = `/api/pawments/${id}/edit`;
             const newContent = pawmentContentDiv.textContent
@@ -129,6 +147,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           pawmentDivToDelete.remove();
         });
         pawmentButtonsDiv.append(pawmentEditButton, pawmentDeleteButton);
+        pawmentButtonsDiv.append(editCancelButton, editSubmitButton);
         pawmentDiv.append(pawmentButtonsDiv);
 
         pawmentsList.prepend(pawmentDiv);
