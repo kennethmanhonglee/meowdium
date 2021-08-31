@@ -201,15 +201,17 @@ hr {
 
 .like-display {
   margin: 0px;
+  user-select: none;
 }
 
 .like-btn {
   color: rgba(255, 0, 0, 0.3);
   cursor: pointer;
+  user-select: none;
 }
 
-.clicked {
-  color: rgba(255, 0, 0, 0.8);
+.clicked .like-btn {
+  color: rgba(255, 100, 100, 0.8);
 }
 
 .new-pawment-box {
