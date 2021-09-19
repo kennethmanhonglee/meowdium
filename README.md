@@ -1,6 +1,6 @@
 # Meowdium
 
-Meowdium is an online platform disrupting the feline digital space by providing cats the opportunity to write, publish, share, and discuss knowlege of all types. 
+Meowdium is an online platform disrupting the feline digital space by providing cats the opportunity to write, publish, share, and discuss knowledge of all types. 
 
 Users are able register for their own accounts, allowing them to publish original written content in the form of pawsts, engage the community through pawments on pawsts, and show their support through catnips. Even without logging into an account, visitors are able to view all pawsts, pawments, and catnips, though they cannot interact.
 
@@ -39,7 +39,7 @@ share our hardwork with present and future colleagues alike.
 
 * Creating the dynamic delete and edit buttons
   * The process of implementing all of the dynamic features was challenging, though 
-    it was particularly difficult to create buttons that dynamically edited and delted content, requiring 
+    it was particularly difficult to create buttons that dynamically edited and deleted content, requiring 
     complex interactions between the front and back ends. Accessing data from the backend 
     to utilize when manipulating the DOM required code that sometimes felt overly long 
     or roundabout. We found the it necessary, and very helpful, to dynamically 
