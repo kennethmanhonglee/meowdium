@@ -1,0 +1,35 @@
+.page-container {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.cat-image {
+  background-image: url("../images/cat-4475583_640.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 400px;
+}
+
+@media screen and (max-width: 1200px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .welcome-message {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

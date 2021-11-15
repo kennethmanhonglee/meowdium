@@ -1,9 +1,9 @@
 /* Main Styling */ /* Put styling that goes everywhere here */
 
 body {
-  font-family: 'PT Serif', Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: "PT Serif", Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 21px;
-  color: #5F5F5F;
+  color: #5f5f5f;
 }
 
 h1 {
@@ -29,7 +29,7 @@ h3 {
 .btn {
   border-radius: 99em;
   padding: 10px;
-  transition: background-color .75s;
+  transition: background-color 0.75s;
   cursor: pointer;
 }
 form .btn.btn-primary {
@@ -55,7 +55,7 @@ form .btn.btn-primary:hover {
   padding: 25px 0;
 }
 
-.nav-bar{
+.nav-bar {
   position: sticky;
   top: 0px;
   box-sizing: border-box;
@@ -101,7 +101,7 @@ form .btn.btn-primary:hover {
   flex: 1 0 auto;
 }
 
-.btn.btn-pawst{
+.btn.btn-pawst {
   width: 65px;
   text-align: center;
 }
@@ -123,7 +123,6 @@ form .btn.btn-primary:hover {
   font-weight: bold;
 }
 
-
 .nav-bar .user-utils,
 .nav-bar .user-utils .logged-in-user {
   display: flex;
@@ -134,7 +133,7 @@ form .btn.btn-primary:hover {
 .nav-bar .btn.btn-login {
   background-color: #ffd7dc;
   font-size: 1rem;
-  color: #5F5F5F;
+  color: #5f5f5f;
 }
 
 .nav-bar .btn.btn-logout:hover,
@@ -159,7 +158,6 @@ input.form-control:focus-visible {
   outline-width: 0;
   border-color: #ffbdc6;
 }
-
 
 .username-btn:hover {
   font-weight: bold;
@@ -218,7 +216,8 @@ input.form-control:focus-visible {
   padding-bottom: 75px;
 }
 
-.footer-bar, .github-links {
+.footer-bar,
+.github-links {
   display: flex;
   justify-content: center;
   align-items: center;

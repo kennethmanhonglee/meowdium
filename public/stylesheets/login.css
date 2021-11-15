@@ -2,7 +2,7 @@
 
 html {
   min-height: 100%;
-  background-image: url('../images/cat-4475583_640.png');
+  background-image: url("../images/cat-4475583_640.png");
   background-repeat: no-repeat;
   background-position: calc(100% - 20px) calc(100% + 155px);
   background-size: 400px;

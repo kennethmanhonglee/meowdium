@@ -1,78 +1,65 @@
-
-/* .user-bio {
-    flex: 0 1 25%;
-} */
-
-/* .bio-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-} */
-
-/* .user-name, .user-email {
-    padding: 15px;
-} */
-
 .pawst-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5% 10%;
 }
 
-.title, .subtitle {
-    width: 85%;
-    word-wrap: normal;
+.title,
+.subtitle {
+  width: 85%;
+  word-wrap: normal;
 }
 
 .post-title {
-    font-weight: bolder;
-    font-size: 2rem;
-    text-align: start;
+  font-weight: bolder;
+  font-size: 2rem;
+  text-align: start;
 }
 
 .post-subtitle {
-    color: grey;
-    font-size: 1.5rem;
-    text-align: start;
+  color: grey;
+  font-size: 1.5rem;
+  text-align: start;
 }
 .author-utils {
   margin-top: 10px;
 }
-.post-author, .like-display {
-    font-size: 1.1rem;
-    text-align: start;
-    text-decoration: none;
-    color: rgba(255, 0, 0, 0.3);
-    text-transform: capitalize;
+.post-author,
+.like-display {
+  font-size: 1.1rem;
+  text-align: start;
+  text-decoration: none;
+  color: rgba(255, 0, 0, 0.3);
+  text-transform: capitalize;
 }
 
 hr {
-    height: 1px;
-    background-color: rgba(255, 0, 0, 0.15);
-    border: none;
-    width: 85%;
+  height: 1px;
+  background-color: rgba(255, 0, 0, 0.15);
+  border: none;
+  width: 85%;
 }
 
 .author-link-footer {
-    font-size: 1.3rem;
-    text-decoration: none;
-    color: rgba(255, 0, 0, 0.3);
-    text-transform: capitalize;
+  font-size: 1.3rem;
+  text-decoration: none;
+  color: rgba(255, 0, 0, 0.3);
+  text-transform: capitalize;
 }
 
-.like-btn, .like-display {
-    font-size: 2rem;
-    color: rgba(255, 0, 0, 0.3);
+.like-btn,
+.like-display {
+  font-size: 2rem;
+  color: rgba(255, 0, 0, 0.3);
 }
 
 .like-display {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .date {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 
 .author-utils {
@@ -84,7 +71,6 @@ hr {
 
 .author-date {
   display: flex;
-
 }
 
 .post-author {
@@ -93,7 +79,6 @@ hr {
 
 .edit-delete {
   display: flex;
-
 }
 
 .function-btns {
@@ -106,30 +91,28 @@ hr {
 .btn-edit-submit {
   padding: 5px;
   border-radius: 0.25em;
-  margin: 0px 3px ;
+  margin: 0px 3px;
 }
 .btn-edit:hover,
 .btn-delete:hover,
 .btn-edit-cancel:hover,
 .btn-edit-submit:hover {
-  background-color: #CCCCCC;
+  background-color: #cccccc;
 }
 
 .post-author:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .author:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .content {
-    width: 85%;
-    /* border: 1px solid black; */
-    box-sizing: border-box;
+  width: 85%;
+  /* border: 1px solid black; */
+  box-sizing: border-box;
 }
-
-
 
 #post-content {
   width: inherit;
@@ -150,8 +133,8 @@ hr {
 }
 
 .like-count {
-    display: flex;
-    align-items:center;
+  display: flex;
+  align-items: center;
 }
 
 #pawments-container h3 {
@@ -163,7 +146,8 @@ hr {
   min-width: 500px;
 }
 
-.form-group, h3 {
+.form-group,
+h3 {
   text-align: center;
 }
 
@@ -173,19 +157,18 @@ hr {
 
 .pawst-content-footer .author {
   margin-right: 10px;
-
 }
 
 .author {
-    width: 50%;
-    text-align: center;
+  width: 50%;
+  text-align: center;
 }
 
 .likes-stats {
   display: flex;
   width: 50%;
   justify-content: center;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
 
@@ -196,8 +179,8 @@ hr {
 }
 
 .likes-stats:hover {
-    background-color: rgba(255, 0, 0, 0.03);
-    border-radius: 8px;
+  background-color: rgba(255, 0, 0, 0.03);
+  border-radius: 8px;
 }
 
 .like-icon,
@@ -261,7 +244,7 @@ hr {
   overflow-wrap: break-word;
   margin-bottom: 20px;
   opacity: 100%;
-  transition: opacity .75s;
+  transition: opacity 0.75s;
 }
 .pawment.blinder {
   opacity: 0%;
@@ -271,7 +254,7 @@ hr {
 }
 .pawmenter-info,
 .pawment-content {
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: "Didact Gothic", sans-serif;
 }
 .pawmenter-info {
   color: #888888;
@@ -279,18 +262,18 @@ hr {
 }
 
 .commenter-name {
-text-align: left;
+  text-align: left;
 }
 .commenter-name-link {
-    font-size: 1.1rem;
-    margin-bottom: 5px;
-    text-decoration: none;
-    text-transform: capitalize;
-    color: rgba(255, 0, 0, 0.3);
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: rgba(255, 0, 0, 0.3);
 }
 
 .commenter-name-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .pawment-date {
@@ -303,15 +286,14 @@ text-align: left;
   padding: 10px;
   color: #333333;
   margin-bottom: 5px;
-  background-color:rgba(255, 215, 220, .25);
+  background-color: rgba(255, 215, 220, 0.25);
   border-radius: 8px;
-  transition: background-color .3s;
+  transition: background-color 0.3s;
   text-align: left;
 }
 
-
 .pawment-content:hover {
-  background-color: rgba(255, 215, 220, .5);
+  background-color: rgba(255, 215, 220, 0.5);
 }
 
 .pawment-content:focus {
@@ -324,5 +306,5 @@ text-align: left;
 }
 
 #pawments-list > div {
-    text-align: center;
+  text-align: center;
 }
