@@ -1,6 +1,5 @@
 /* Edit Pawst Styling */
 
-
 input.form-control {
   min-width: 500px;
 }
@@ -29,9 +28,8 @@ input.form-control {
   border: none;
   font-size: large;
   color: #333333;
-  background-color: #FFF8FA;
+  background-color: #fff8fa;
 }
-
 
 .edit-pawst-submit {
   text-align: end;

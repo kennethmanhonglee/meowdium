@@ -17,3 +17,19 @@
   width: 400px;
   height: 400px;
 }
+
+@media screen and (max-width: 1200px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .welcome-message {
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}

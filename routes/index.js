@@ -10,7 +10,7 @@ router.get(
   "/",
   asyncHandler(async (req, res, next) => {
     if (!res.locals.authenticated)
-      res.render("splash", {
+      return res.render("splash", {
         title: "Meowdium",
       });
 
