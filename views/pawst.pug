@@ -32,12 +32,19 @@ block content
       div(class="pawst-content-footer")
         div(class="author")
             a(href=`/users/${post.userId}` class='author-link-footer')= userName
-        div(class="likes-stats")
-          div(class="like-icon")
-            span(class="material-icons like-btn") pets
-          div(class="like-count")
-            p(class="like-display")= catnipsCount
-            //- send back like amount
+        if (locals.user)
+          div(class="likes-stats")
+            div(class="like-icon")
+              span(class="material-icons like-btn") pets
+            div(class="like-count")
+              p(class="like-display")= catnipsCount
+              //- send back like amount
+        else
+          div(class="likes-stats-logged-out")
+            div(class="like-icon")
+              span(class="material-icons like-btn-logged-out") pets
+            div(class="like-count")
+              p(class="like-display")= catnipsCount
 
       div(id="pawments-container")
         h3 Pawments
