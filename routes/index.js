@@ -9,7 +9,10 @@ const { User, Pawst } = require("../db/models");
 router.get(
   "/",
   asyncHandler(async (req, res, next) => {
-    if (!res.locals.authenticated) res.render("splash");
+    if (!res.locals.authenticated)
+      res.render("splash", {
+        title: "Meowdium",
+      });
 
     const posts = await Pawst.findAll({
       order: [["createdAt", "DESC"]],

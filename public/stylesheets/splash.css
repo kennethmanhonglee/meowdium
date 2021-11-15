@@ -1,0 +1,26 @@
+.page-container {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.cat-image {
+  background-image: url("../images/cat-4475583_640.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 400px;
+  height: 400px;
+}
+
+.welcome-message {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  height: 50%;
+  padding: 20px;
+}
