@@ -298,6 +298,7 @@ h3 {
 
 .pawment-content:focus {
   box-shadow: inset 0px 1px 3px rgb(255 120 120 / 30%);
+  background-color: rgba(223, 192, 196, 0.5);
 }
 
 .pawment-buttons {
