@@ -11,11 +11,15 @@ input.form-control {
 #title {
   font-size: larger;
   border: none;
+  background-color: rgba(255, 215, 220, 0.25);
+  border-radius: 4px;
 }
 
 #subtitle {
   font-size: larger;
   border: none;
+  background-color: rgba(255, 215, 220, 0.25);
+  border-radius: 4px;
 }
 
 #content {
