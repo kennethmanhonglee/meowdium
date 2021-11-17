@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         pawmentEditButton.addEventListener('click', async (e) => {
 
           pawmentContentDiv.setAttribute('contentEditable', 'true');
+          pawmentContentDiv.focus();
           pawmentEditButton.setAttribute('hidden', 'true');
           pawmentDeleteButton.setAttribute('hidden', 'true');
           editSubmitButton.removeAttribute('hidden');

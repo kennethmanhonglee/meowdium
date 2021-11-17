@@ -18,6 +18,16 @@
   height: 400px;
 }
 
+p > a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #ff6464;
+}
+
+p > a:hover {
+  color:rgb(219, 141, 141)
+}
+
 @media screen and (max-width: 1200px) {
   h2 {
     font-size: 2rem;

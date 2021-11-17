@@ -35,3 +35,23 @@ input.form-control {
 .demo-div {
   margin-top: 20px;
 }
+
+#userName {
+  background-color: rgba(255, 215, 220, 0.25);
+  border-radius: 4px;
+}
+
+#email {
+  background-color: rgba(255, 215, 220, 0.25);
+  border-radius: 4px;
+}
+
+#password {
+  background-color: rgba(255, 215, 220, 0.25);
+  border-radius: 4px;
+}
+
+#confirmPassword {
+  background-color: rgba(255, 215, 220, 0.25);
+  border-radius: 4px;
+}
