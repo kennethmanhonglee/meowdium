@@ -10,6 +10,16 @@
   width: 80%;
 }
 
+.login-signup-container {
+  background-color: rgba(255, 0, 0, 0.02);
+  border-radius: 10px;
+  padding: 1px 20px 5px;
+  margin-top: 5px;
+  box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.03);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-width: 0 0 1px;
+}
+
 .cat-image {
   background-image: url("../images/cat-4475583_640.png");
   background-size: contain;
